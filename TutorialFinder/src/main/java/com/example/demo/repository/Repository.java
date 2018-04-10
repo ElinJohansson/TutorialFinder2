@@ -8,9 +8,9 @@ public interface Repository {
 
     int createNewLanguage(String name);
 
-    void createNewTag(String name);
+    int createNewTag(String name);
 
     int createNewFormat(String name);
 
-    void addTags(List<String> tags, String title);
+    void addTagsToTutorial(List<String> tags, String title);
 }

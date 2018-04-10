@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Admin</title>
 </head>
 <body>
 
 <h2>Add tutorial:</h2>
 
-<form>
-    <p>Title: </p><input type="text" name="title">
-    <p>URL: </p><input type="text" name="url">
-    <p>Language: </p><input type="text" name="language">
-    <p>Format: </p><input type="text" name="format">
-    <p>Date tutorial was created: </p><input type="text" name="creationDate">
+<form method="post" action="/addTutorial">
+    <p>Title: </p><input type="text" name="title"/>
+    <p>URL: </p><input type="text" name="url"/>
+    <p>Language: </p><input type="text" name="language"/>
+    <p>Format: </p><input type="text" name="format"/>
+    <p>Date tutorial was created: </p><input type="datetime-local" name="creationDate"/>
     <p>Description: </p><textarea name="descr"></textarea>
-    <p>Tags, separated by space: </p><input type="text" name="tag">
-    <input type="submit" value="Submit tutorial">
-
+    <p>Tags, separated by space: </p><input type="text" name="tag"/>
+    <input type="submit" value="Submit tutorial"/>
 </form>
 
 <!--<h2>Add tag to tutorial:</h2>-->
 <!--<form>-->
-    <!--<p>Tag name:</p><input type="text" name="tag">-->
-    <!--<input type="submit" value="Add tag">-->
+<!--<p>Tag name:</p><input type="text" name="tag">-->
+<!--<input type="submit" value="Add tag">-->
 <!--</form>-->
 
 </body>

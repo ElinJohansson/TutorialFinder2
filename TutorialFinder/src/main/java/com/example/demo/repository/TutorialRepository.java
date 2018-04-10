@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 
 @Component
-public class TutorialRepository {
+public class TutorialRepository implements Repository {
 
     @Autowired
     private DataSource dataSource;

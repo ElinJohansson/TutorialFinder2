@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+
 import com.example.demo.domain.Language;
 import com.example.demo.domain.Tag;
 import com.example.demo.repository.Repository;
@@ -10,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +39,15 @@ public class TutorialController {
         //To get multiple tags from tag-string
         List<String> tags = Arrays.asList(tag.trim().split(" +"));
         repository.createTutorial(title, descr, language, format, url);
-        repository.addTags(tags,title);
+        repository.addTagsToTutorial(tags,title);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/addTags")
+    public String getInfoFromAddTutorialForm(@RequestParam String title, @RequestParam String tag) {
+        //To get multiple tags from tag-string
+        List<String> tags = Arrays.asList(tag.trim().split(" +"));
+        repository.addTagsToTutorial(tags,title);
         return "redirect:/admin";
     }
 

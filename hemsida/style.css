@@ -1,0 +1,76 @@
+BODY { 
+color: #000000; 
+font-family: verdana, sans-serif; 
+font-size: 10px; 
+
+				/* Scroll utseende */
+SCROLLBAR-FACE-COLOR: #FFFFFF; 
+SCROLLBAR-HIGHLIGHT-COLOR: #FFFFFF; 
+SCROLLBAR-SHADOW-COLOR: #000000; 
+SCROLLBAR-3DLIGHT-COLOR: #000000; 
+SCROLLBAR-ARROW-COLOR: #000000; 
+SCROLLBAR-TRACK-COLOR: #FFFFFF; 
+SCROLLBAR-DARKSHADOW-COLOR: #FFFFFF;
+}
+
+				/* Textutseende */
+.fontstyle {
+	font-family: verdana;
+	font-size: 1.0em;
+	font-style: normal;
+	color: #ccc000;
+	text-decoration: none;
+} 
+
+.fontspacing {              
+    font-size:   10pt;
+    line-height: 10pt;  
+}
+
+					/* Länkar */
+a:link {
+	font-family: verdana;
+	font-size: 1.1em;
+	font-style: normal;
+	color: #61482E;
+	text-decoration: none;
+}
+
+a:hoover {
+	font-family: Verdana;
+	font-size: 1.1em;,,
+	font-style: normal;
+	color: #CC9861;
+	text-decoration: none;
+}
+
+a:visited {
+	font-family: Verdana;
+	font-size: 1.1em;
+	font-style: normal;
+	color: #4C3924;
+	text-decoration: none;
+}
+
+a:active {
+	font-family: Verdana;
+	font-size: 1.1em;
+	font-style: normal;
+	color: #AC7831;
+	text-decoration: none;
+}
+
+
+						/* tabeller */
+.rubrik {
+  background-color: #BD9B50;
+  color: black;
+}
+.dark {
+  background-color: #E3BE67;
+  color: black;
+}
+.light {
+  background-color: #AC7831;
+  color: black;
+}

@@ -27,12 +27,13 @@ public class TutorialRepository implements Repository {
             if (languageId < 0) {
                 languageId = createNewLanguage(language);
             }
-            //If languageId is less than zero the language wasnt found
+            //If formatId is less than zero the language wasnt found
             if (formatId < 0) {
                 formatId = createNewFormat(format);
-                if (languageId < 0 || formatId < 0) {
-                    throw new TutorialRepositoryException("Unable to create language or format");
-                }
+            }
+
+            if (languageId < 0 || formatId < 0) {
+                throw new TutorialRepositoryException("Unable to create language or format");
             }
 
             ps.setString(1, title);

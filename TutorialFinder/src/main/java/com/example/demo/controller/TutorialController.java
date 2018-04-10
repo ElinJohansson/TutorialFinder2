@@ -27,12 +27,13 @@ public class TutorialController {
 
     @PostMapping("/addTutorial")
     public String getInfoFromAddTutorialForm(@RequestParam String title, @RequestParam String url, @RequestParam String language,
-                                             @RequestParam String format, @RequestParam LocalDateTime creationDate, @RequestParam String descr,
+                                             @RequestParam String format, @RequestParam String descr,
                                              @RequestParam String tag) {
         //To get multiple tags from tag-string
         List<String> tags = Arrays.asList(tag.trim().split(" +"));
-        repository.createTutorial(title, descr, creationDate, language, format, url, tags);
-        return "admin";
+        repository.createTutorial(title, descr, language, format, url);
+        repository.addTags(tags,title);
+        return "redirect:/admin";
     }
 
 }

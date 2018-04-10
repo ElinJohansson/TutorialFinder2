@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Language;
 import com.example.demo.domain.Tag;
 import com.example.demo.repository.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,13 @@ public class TutorialController {
     @GetMapping("/admin")
     public ModelAndView getAdminPage(){
         return new ModelAndView("admin");
+    }
+
+    @GetMapping("/FilterTabell")
+    public ModelAndView getFilterTabellPage(){
+        List <Language> languages = repository.getLanguages();
+        return new ModelAndView("Filtertabell").addObject("languages", languages);
+
     }
 
     @PostMapping("/addTutorial")

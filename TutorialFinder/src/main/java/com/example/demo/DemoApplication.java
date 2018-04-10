@@ -31,6 +31,7 @@ public class DemoApplication implements CommandLineRunner {
 //                "\tcreationDate date NOT NULL,\n" +
 //                "\tlanguage_id int NOT NULL,\n" +
 //                "\tformat_id int NOT NULL,\n" +
+//                "\turl nvarchar (2000), \n" +
 //                "\tPRIMARY KEY (id)\n" +
 //                ")");
 //        jdbcTemplate.execute("CREATE TABLE Language (\n" +

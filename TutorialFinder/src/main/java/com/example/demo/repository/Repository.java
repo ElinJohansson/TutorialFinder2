@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Language;
+import com.example.demo.domain.Tutorial;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,4 +18,6 @@ public interface Repository {
     void addTagsToTutorial(List<String> tags, String title);
 
     List<Language> getLanguages();
+
+    List<Tutorial> getTutorials();
 }

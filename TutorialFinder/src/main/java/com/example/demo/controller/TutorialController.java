@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Language;
 import com.example.demo.domain.Tag;
+import com.example.demo.domain.Tutorial;
 import com.example.demo.repository.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,17 @@ public class TutorialController {
         return new ModelAndView("admin");
     }
 
+//    @GetMapping("/FilterTabell")              todo
+//    public ModelAndView getFilterTabellPage(){
+//        List <Language> languages = repository.getLanguages();
+//        return new ModelAndView("Filtertabell").addObject("languages", languages);
+//
+//    }
     @GetMapping("/FilterTabell")
-    public ModelAndView getFilterTabellPage(){
+    public ModelAndView getTutorialsByFilter(){
+        List <Tutorial> tutorials = repository.getTutorials();
         List <Language> languages = repository.getLanguages();
-        return new ModelAndView("Filtertabell").addObject("languages", languages);
+        return new ModelAndView("Filtertabell").addObject("tutorials", tutorials).addObject("languages", languages);
 
     }
 

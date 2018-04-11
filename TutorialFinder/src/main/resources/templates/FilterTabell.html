@@ -15,6 +15,30 @@
     </li>
 </ol>
 
+<table>
+    <th:block th:each="tutorial : ${tutorials}">
+        <tr>
+            <td th:text="${tutorial.id}">...</td>
+            <td th:text="${tutorial.title}">...</td>
+            <td th:text="${tutorial.language}">...</td>
+            <td th:text="${tutorial.format}">...</td>
+            <td th:text="${tutorial.avgRating}">...</td>
+            <td th:text="${tutorial.creationDate}">...</td>
+            <td th:text="${tutorial.id}">...</td>
+            <td th:text="${tutorial.descr}">...</td>
+            <td th:text="${tutorial.url}">...</td>
+        </tr>
+    </th:block>
+</table>
+
+<!--results.getLong("id"),-->
+<!--results.getString("title"),-->
+<!--results.getString("language"),-->
+<!--results.getString("format"),-->
+<!--results.getDouble("avgRating"),-->
+<!--results.getTimestamp("creationDate").toLocalDateTime(),-->
+<!--results.getString("descr"),-->
+<!--results.getString("url")));-->
 
 
 

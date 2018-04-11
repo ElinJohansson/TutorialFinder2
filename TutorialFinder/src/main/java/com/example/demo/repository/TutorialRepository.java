@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,36 +137,49 @@ public class TutorialRepository implements Repository {
     public void addTagsToTutorial(List<String> tags, String title) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO TutorialTags (tags_id, tutorial_id)\n " +
-                     "VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                     "VALUES (?, ?)")) {
+
             int tutorialId = getTutorialId(title);
-            System.out.println(tutorialId);
-            if(tutorialId < 0){
+            if (tutorialId < 0) {
                 throw new TutorialRepositoryException("Tutorial was not found");
             }
 
-            int tagId = 0;
+            int tagId;
 
-            for(String tagName : tags){
+            for (String tagName : tags) {
                 tagId = getTagId(tagName);
-                System.out.println("tagid"+tagId);
-                if(tagId < 0){
+                if (tagId < 0) {
                     tagId = createNewTag(tagName);
+                } else {
+                    if (getTutorialTagId(tagId, tutorialId) != -1) {
+                        continue;
+                    }
                 }
                 ps.setInt(1, tagId);
                 ps.setInt(2, tutorialId);
                 ps.executeUpdate();
             }
 
-//            ResultSet rs = ps.getGeneratedKeys();
-//            int formatId = -1;
-//            while (rs.next()) {
-//                formatId = rs.getInt(1);
-//            }
-//            return formatId;
         } catch (SQLException e) {
             throw new TutorialRepositoryException("Unable to add format to database", e);
         }
 
+    }
+
+    private int getTutorialTagId(int tagId, int tutorialId) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT id FROM TutorialTags " +
+                     "WHERE tags_id = ? AND tutorial_id = ?")) {
+            ps.setInt(1, tagId);
+            ps.setInt(2, tutorialId);
+            ResultSet results = ps.executeQuery();
+            if (results.next()) {
+                return results.getInt("id");
+            }
+        } catch (SQLException e) {
+            throw new TutorialRepositoryException("Unable to fetch id from database", e);
+        }
+        return -1;
     }
 
     private int getTagId(String tagName) {
@@ -205,6 +217,7 @@ public class TutorialRepository implements Repository {
             ResultSet results = ps.executeQuery();
 
             List<Language> languages = new ArrayList<>();
+
 
             while (results.next()){
                 languages.add(new Language (results.getString("name"), results.getInt("id")));

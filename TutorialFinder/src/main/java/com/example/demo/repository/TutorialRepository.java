@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,18 +137,18 @@ public class TutorialRepository implements Repository {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO TutorialTags (tags_id, tutorial_id)\n " +
                      "VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+
             int tutorialId = getTutorialId(title);
-            System.out.println(tutorialId);
-            if(tutorialId < 0){
+            if (tutorialId < 0) {
                 throw new TutorialRepositoryException("Tutorial was not found");
             }
 
-            int tagId = 0;
+            int tagId;
 
-            for(String tagName : tags){
+            for (String tagName : tags) {
                 tagId = getTagId(tagName);
-                System.out.println("tagid"+tagId);
-                if(tagId < 0){
+                System.out.println("tagid" + tagId);
+                if (tagId < 0) {
                     tagId = createNewTag(tagName);
                 }
                 ps.setInt(1, tagId);
@@ -157,12 +156,6 @@ public class TutorialRepository implements Repository {
                 ps.executeUpdate();
             }
 
-//            ResultSet rs = ps.getGeneratedKeys();
-//            int formatId = -1;
-//            while (rs.next()) {
-//                formatId = rs.getInt(1);
-//            }
-//            return formatId;
         } catch (SQLException e) {
             throw new TutorialRepositoryException("Unable to add format to database", e);
         }
@@ -205,8 +198,8 @@ public class TutorialRepository implements Repository {
 
             List<Language> languages = new ArrayList<>();
 
-            while (results.next()){
-                languages.add(new Language (results.getString("name")));
+            while (results.next()) {
+                languages.add(new Language(results.getString("name")));
             }
             return languages;
 

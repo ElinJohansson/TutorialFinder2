@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Language;
+import com.example.demo.domain.Tutorial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -212,21 +213,20 @@ public class TutorialRepository implements Repository {
     @Override
     public List<Language> getLanguages() {
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT name FROM Language")) {
+             PreparedStatement ps = conn.prepareStatement("SELECT name, id FROM Language")) {
             ResultSet results = ps.executeQuery();
 
             List<Language> languages = new ArrayList<>();
 
-            while (results.next()) {
-                languages.add(new Language(results.getString("name")));
+
+            while (results.next()){
+                languages.add(new Language (results.getString("name"), results.getInt("id")));
             }
             return languages;
-
         } catch (SQLException e)
-
         {
             throw new TutorialRepositoryException("Unable to fetch id from database", e);
         }
     }
-}
+    }
 

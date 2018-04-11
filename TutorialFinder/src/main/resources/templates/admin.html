@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Admin</title>
+</head>
+<body>
+
+<h2>Add tutorial:</h2>
+
+<form method="post" action="/addTutorial">
+    <p>Title: </p><input type="text" name="title"/>
+    <p>URL: </p><input type="text" name="url"/>
+    <p>Language: </p><input type="text" name="language"/>
+    <p>Format: </p><input type="text" name="format"/>
+    <p>Description: </p><textarea name="descr"></textarea>
+    <p>Tags, separated by space: </p><input type="text" name="tag"/>
+    <input type="submit" value="Submit tutorial"/>
+</form>
+
+<h2>Add tag to tutorial:</h2>
+<form method="post" action="/addTags">
+    <p>Tutorial title on which to add tag:</p><input type="text" name="title"/>
+    <p>Tag(s) name, separated by space:</p><input type="text" name="tag"/>
+    <input type="submit" value="Add tag"/>
+</form>
+
+</body>
+</html>

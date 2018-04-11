@@ -9,11 +9,27 @@
 <h2>Tabell filtrering:</h2>
 
 
-<ol>
+// Lista med checkbox
+<ul>
     <li th:each="language : ${languages}">
-        <p th:text="${language.name}"></p>
+        <input checked="true" type="checkbox" th:value="${language.id}"/>
+        <label th:text="${language.name}"></label>
     </li>
+</ul>
+
+// lista över alla språk
+<ol>
+<li th:each="language : ${languages}">
+<p th:text="${language.name}"></p>
+</li>
 </ol>
+
+<!--<ul id="itemsToFilter">&ndash;&gt;-->
+    <!--<li data-type= "${language.id}">Hej</li>-->
+<!--</ul>-->
+
+
+
 
 
 

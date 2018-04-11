@@ -25,6 +25,7 @@ public class Tutorial {
         this.url = url;
     }
 
+
     public void addTag(Tag tag) {
         this.tags.add(tag);
     }

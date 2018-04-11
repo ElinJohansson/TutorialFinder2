@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Language;
 import com.example.demo.domain.Tag;
+import com.example.demo.domain.Tutorial;
 import com.example.demo.repository.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,6 @@ public class TutorialController {
     public ModelAndView getFilterTabellPage(){
         List <Language> languages = repository.getLanguages();
         return new ModelAndView("Filtertabell").addObject("languages", languages);
-
     }
 
     @PostMapping("/addTutorial")

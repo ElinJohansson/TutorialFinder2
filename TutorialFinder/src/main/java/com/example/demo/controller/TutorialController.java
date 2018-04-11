@@ -51,4 +51,10 @@ public class TutorialController {
         return "redirect:/admin";
     }
 
+    @PostMapping("/addRating")
+    public String getInfoFromAddTutorialForm(@RequestParam String title, @RequestParam int rating) {
+        repository.addRatingtToTutorial(title, rating);
+        return "redirect:/admin";
+    }
+
 }

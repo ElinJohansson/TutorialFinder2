@@ -160,7 +160,7 @@ public class TutorialRepository implements Repository {
             }
 
         } catch (SQLException e) {
-            throw new TutorialRepositoryException("Unable to add format to database", e);
+            throw new TutorialRepositoryException("Unable to add tags to tutorial", e);
         }
 
     }
@@ -227,6 +227,72 @@ public class TutorialRepository implements Repository {
         {
             throw new TutorialRepositoryException("Unable to fetch id from database", e);
         }
+    }
+
+    @Override
+    public void addRatingtToTutorial(String title, int rating) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO TutorialRating (tutorial_id, rating_id)\n " +
+                     "VALUES (?, ?)")) {
+
+            int tutorialId = getTutorialId(title);
+            if (tutorialId < 0) {
+                throw new TutorialRepositoryException("Tutorial was not found");
+            }
+
+            //using superuser as default user for now
+            int ratingId = getRatingId(rating, "superuser");
+            if (ratingId < 0) {
+                ratingId = createNewRating(rating, "superuser");
+            }
+
+            ps.setInt(1, tutorialId);
+            ps.setInt(2, ratingId);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new TutorialRepositoryException("Unable to add rating to tutorial", e);
+        }
+
+    }
+
+    private int createNewRating(int rating, String user) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Rating (value, username)\n" +
+                     "VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, rating);
+            ps.setString(2, user);
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            int ratingId = -1;
+            while (rs.next()) {
+                ratingId = rs.getInt(1);
+            }
+            return ratingId;
+
+        } catch (SQLException e) {
+            throw new TutorialRepositoryException("Unable to add tag to database", e);
+        }
+    }
+
+    private int getRatingId(int rating, String user) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT id FROM Rating WHERE username = ? and value = ?")) {
+            ps.setString(1, user);
+            ps.setInt(2, rating);
+            ResultSet results = ps.executeQuery();
+
+            if (results.next()) {
+                return results.getInt("id");
+            }
+
+
+        } catch (SQLException e)
+
+        {
+            throw new TutorialRepositoryException("Unable to fetch id from database", e);
+        }
+        return -1;
     }
 }
 

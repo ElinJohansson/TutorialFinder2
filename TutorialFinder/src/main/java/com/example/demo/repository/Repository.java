@@ -17,4 +17,6 @@ public interface Repository {
     void addTagsToTutorial(List<String> tags, String title);
 
     List<Language> getLanguages();
+
+    void addRatingtToTutorial(String title, int rating);
 }

@@ -1,0 +1,47 @@
+FUNGERAR EJ NÄR DEN ÄR SAMMANKOPPLAD MED HTML
+
+
+body {
+    padding: 25px;
+}
+h1 {
+    font-family: "Franklin Gothic Medium", sans-serif;
+    color: #666;
+    font-weight: normal;
+    font-size: 56px;
+    margin: 15px;
+}
+ul {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13pt;
+    line-height: 30px;
+    padding: 0px;
+}
+.filterSection li {
+    list-style: none;
+    margin: 0px;
+    padding: 5px;
+    display: inline;
+
+}
+.filterSection {
+    margin: 0px;
+    padding: 0px;
+    background-color: #EEEEEE;
+}
+#itemsToFilter li {
+    list-style: none;
+    background-position: 0 3px;
+    background-repeat: no-repeat;
+    margin: 15px;
+    padding-left: 40px;
+    font-size: 15pt;
+    color: #666;
+}
+
+.showItem {
+    display: list-item;
+}
+.hideItem {
+    display: none;
+}

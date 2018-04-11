@@ -29,7 +29,7 @@ public class TutorialController {
     @GetMapping("/FilterTabell")
     public ModelAndView getFilterTabellPage(){
         List <Language> languages = repository.getLanguages();
-        return new ModelAndView("Filtertabell").addObject("languages", languages);
+        return new ModelAndView("FilterTabell").addObject("languages", languages);
     }
 
     @PostMapping("/addTutorial")

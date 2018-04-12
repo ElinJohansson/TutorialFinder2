@@ -85,4 +85,9 @@ public class TutorialController {
         return tutorials;
     }
 
+    @PostMapping("addRating")
+    public void postRating(@RequestParam int rating, String title) {
+        repository.addRatingToTutorial(title, rating);
+    }
+
 }

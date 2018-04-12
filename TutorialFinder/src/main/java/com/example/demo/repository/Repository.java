@@ -9,6 +9,8 @@ import java.util.List;
 public interface Repository {
     void createTutorial(String title, String descr, String language, String format, String url);
 
+    int getFormatId(String format);
+
     int createNewLanguage(String name);
 
     int createNewTag(String name);
@@ -19,12 +21,15 @@ public interface Repository {
 
     List<Language> getLanguages();
 
+    void addRatingToTutorial(String title, int rating);
+
     List<Tutorial> getTutorials();
 
 
     List<Tutorial> getTutorialsByLanguage(List<String> languages, List<String> formats);
 
     List<Format> getFormats();
+
 }
 
 

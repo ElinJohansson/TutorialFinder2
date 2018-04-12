@@ -27,7 +27,7 @@ public class TutorialController {
     public ModelAndView getAdminPage(){
         return new ModelAndView("admin");
     }
-    
+
     @GetMapping("/index")
     public ModelAndView getTutorialsByFilter(){
         List <Tutorial> tutorials = repository.getTutorials();

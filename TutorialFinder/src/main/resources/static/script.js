@@ -41,20 +41,22 @@ function render(tutorialList) {
     $("#returnedLanguages").html("");
     for (var i = 0; i < tutorialList.length; i++) {
         $("#returnedLanguages").append("<li>" +
-            "<h4>Title:</h4>" + tutorialList[i].title +
-            "<h4>Average Rating:</h4>\n" + tutorialList[i].avgRating +
-            "<h4>URL:</h4>\n" + "<a href=\"http://" + tutorialList[i].url + "\" target=\"_blank\">" + tutorialList[i].url + "</a>" +
-            "<h4>Year added:</h4>\n" + tutorialList[i].creationDate.year +
-            "<h4>Description:</h4>\n" + tutorialList[i].descr +
-            "<h4>Format:</h4>\n" + tutorialList[i].format +
-            "<h4>Language:</h4>" + tutorialList[i].language +
-            "</li>");
 
+            "<h4>Title: <span>"+ tutorialList[i].title +"</span></h4>" +
+            "<h4>Average Rating: <span>"+ tutorialList[i].avgRating +"</span></h4>\n" +
+            "<h4>URL: <span>"+ tutorialList[i].url +"</span></h4>\n" +
+            "<h4>Year added: <span>" + tutorialList[i].creationDate.year +"</span></h4>\n" +
+            "<h4>Description: <span>" + tutorialList[i].descr +"</span></h4>\n" +
+            "<form method=\"post\" action=\"addRating\">\n" +
+            "    <select name=\"rating\">\n" +
+            "    <option value=\"1\">1</option>\n" +
+            "    <option value=\"2\">2</option>\n" +
+            "    <option value=\"3\">3</option>\n" +
+            "    <option value=\"4\">4</option>\n" +
+            "    <option value=\"5\">5</option>\n" +
+            "    </select>\n" +
+            "    <input type=\"submit\" id=\"addRating\" value=\"Rate Tutorial\"/>\n" +
+            "    </form></li>");
     }
 }
-
-// <a href="http://www.google.se" target="_blank"> klicka här </a>
-
-
-
 

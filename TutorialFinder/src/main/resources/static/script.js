@@ -42,13 +42,11 @@ function render(tutorialList) {
     $("#returnedLanguages").html("");
     for (var i = 0; i < tutorialList.length; i++) {
         $("#returnedLanguages").append("<li>" +
-            "<p>Title:</p>" + tutorialList[i].title +
-            "<p>Average Rating:</p>\n" + tutorialList[i].avgRating +
-            "<p>URL:</p>\n" + tutorialList[i].url +
-            "<p>Year added:</p>\n" + tutorialList[i].creationDate.year +
-            "<p>Description:</p>\n" + tutorialList[i].descr +
-            "<p>Format:</p>\n" + tutorialList[i].format +
-            "<p>Language:</p>" + tutorialList[i].language +
+            "<h4>Title: <span>"+ tutorialList[i].title +"</span></h4>" +
+            "<h4>Average Rating: <span>"+ tutorialList[i].avgRating +"</span></h4>\n" +
+            "<h4>URL: <span>"+ tutorialList[i].url +"</span></h4>\n" +
+            "<h4>Year added: <span>" + tutorialList[i].creationDate.year +"</span></h4>\n" +
+            "<h4>Description: <span>" + tutorialList[i].descr +"</span></h4>\n" +
             "<form method=\"post\" action=\"addRating\">\n" +
             "    <select name=\"rating\">\n" +
             "    <option value=\"1\">1</option>\n" +
@@ -61,9 +59,4 @@ function render(tutorialList) {
             "    </form></li>");
     }
 }
-
-
-
-
-
 

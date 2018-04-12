@@ -19,12 +19,15 @@ public interface Repository {
 
     List<Language> getLanguages();
 
+    void addRatingToTutorial(String title, int rating);
+
     List<Tutorial> getTutorials();
 
 
     List<Tutorial> getTutorialsByLanguage(List<String> languages, List<String> formats);
 
     List<Format> getFormats();
+
 }
 
 

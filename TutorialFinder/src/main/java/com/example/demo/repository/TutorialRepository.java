@@ -164,7 +164,7 @@ public class TutorialRepository implements Repository {
             }
 
         } catch (SQLException e) {
-            throw new TutorialRepositoryException("Unable to add format to database", e);
+            throw new TutorialRepositoryException("Unable to add tags to tutorial", e);
         }
 
     }
@@ -400,6 +400,27 @@ public class TutorialRepository implements Repository {
         } catch (SQLException e) {
             throw new TutorialRepositoryException("Unable to fetch id from database", e);
         }
+    }
+
+    @Override
+    public void addRatingToTutorial(String title, int rating) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Rating (tutorial_id, rating)\n " +
+                     "VALUES (?, ?)")) {
+
+            int tutorialId = getTutorialId(title);
+            if (tutorialId < 0) {
+                throw new TutorialRepositoryException("Tutorial was not found");
+            }
+
+            ps.setInt(1, tutorialId);
+            ps.setInt(2, rating);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new TutorialRepositoryException("Unable to add rating to tutorial", e);
+        }
+
     }
 }
 

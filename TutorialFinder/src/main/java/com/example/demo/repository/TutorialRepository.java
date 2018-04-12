@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.domain.Format;
 import com.example.demo.domain.Language;
+import com.example.demo.domain.Tag;
 import com.example.demo.domain.Tutorial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -451,6 +452,25 @@ public class TutorialRepository implements Repository {
         {
             throw new TutorialRepositoryException("Unable to fetch toplist from database", e);
         }
+    }
+
+    @Override
+    public List<String> getTags() {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT name FROM Tags")) {
+            ResultSet results = ps.executeQuery();
+
+            List<String> tags = new ArrayList<>();
+
+            while (results.next()) {
+                tags.add(results.getString("name"));
+            }
+            return tags;
+
+        } catch (SQLException e) {
+            throw new TutorialRepositoryException("Unable to fetch format from database", e);
+        }
+
     }
 }
 

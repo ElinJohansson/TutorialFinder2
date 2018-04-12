@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.domain.Format;
 import com.example.demo.domain.Language;
+import com.example.demo.domain.Tag;
 import com.example.demo.domain.Tutorial;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public interface Repository {
 
     List<Tutorial> getToplist();
 
+    List<String> getTags();
 }
 
 

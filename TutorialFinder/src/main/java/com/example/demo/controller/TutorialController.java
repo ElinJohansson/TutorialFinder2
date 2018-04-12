@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Format;
 import com.example.demo.domain.Language;
+import com.example.demo.domain.Tag;
 import com.example.demo.domain.Tutorial;
 import com.example.demo.repository.Repository;
 import com.example.demo.repository.TutorialRepositoryException;
@@ -37,12 +38,14 @@ public class TutorialController {
         List<Language> languages = repository.getLanguages();
         List<Tutorial> topList = repository.getToplist();
         List<Format> formats = repository.getFormats();
+        List<String> tags = repository.getTags();
 
         return new ModelAndView("index")
                 .addObject("tutorials", tutorials)
                 .addObject("languages", languages)
                 .addObject("formats", formats)
-                .addObject("topList", topList);
+                .addObject("topList", topList)
+                .addObject("tags", tags);
     }
 
     @PostMapping("/addTutorial")

@@ -1,11 +1,11 @@
 package com.example.demo.domain;
 
 public class Tag {
-    private final long id;
+    private  long id;
     private final String name;
 
-    public Tag(long id, String name) {
-        this.id = id;
+    public Tag( String name) {
+
         this.name = name;
     }
 

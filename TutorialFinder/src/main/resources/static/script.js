@@ -1,16 +1,16 @@
 $("input[type=\"checkbox\"]").on("click", function (e) {
     //get all boxes that are checked
-   var checkedBoxes = $("input[type=\"checkbox\"]:checked");
-   var language = "";
-   var format = "";
-   for(var i = 0; i < checkedBoxes.length; i++){
-        if($(checkedBoxes[i]).hasClass("languageCheckbox")){
-            language+=$(checkedBoxes[i]).val()+",";
+    var checkedBoxes = $("input[type=\"checkbox\"]:checked");
+    var language = "";
+    var format = "";
+    for (var i = 0; i < checkedBoxes.length; i++) {
+        if ($(checkedBoxes[i]).hasClass("languageCheckbox")) {
+            language += $(checkedBoxes[i]).val() + ",";
         }
-        if($(checkedBoxes[i]).hasClass("formatCheckbox")){
-            format+=$(checkedBoxes[i]).val()+",";
+        if ($(checkedBoxes[i]).hasClass("formatCheckbox")) {
+            format += $(checkedBoxes[i]).val() + ",";
         }
-   }
+    }
 
     //ajaxanrop till controllern
     console.log("value: " + language);
@@ -35,13 +35,13 @@ $("input[type=\"checkbox\"]").on("click", function (e) {
 });
 
 
-
 //Renders the tutorialList which is retrieved using the ajax request, the returned list is actually
 //an array which is why we're using a regular for loop
 function render(tutorialList) {
     $("#returnedLanguages").html("");
     for (var i = 0; i < tutorialList.length; i++) {
         $("#returnedLanguages").append("<li>" +
+
             "<h4>Title: <span>"+ tutorialList[i].title +"</span></h4>" +
             "<h4>Average Rating: <span>"+ tutorialList[i].avgRating +"</span></h4>\n" +
             "<h4>URL: <span>"+ tutorialList[i].url +"</span></h4>\n" +

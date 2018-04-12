@@ -45,11 +45,7 @@ public class DemoApplication implements CommandLineRunner {
 //                "\tname nvarchar(100) NOT NULL,\n" +
 //                "\tPRIMARY KEY (id)\n" +
 //                "\t)");
-//        jdbcTemplate.execute("CREATE TABLE Rating (\n" +
-//                "id int IDENTITY(1,1) NOT NULL,\n" +
-//                "value int NOT NULL CHECK (value >= 1 AND value <= 5),\n" +
-//                "PRIMARY KEY (id)\n" +
-//                ")");
+
 //        jdbcTemplate.execute("CREATE TABLE Tags (\n" +
 //                "id int IDENTITY(1,1) NOT NULL,\n" +
 //                "name nvarchar(100) NOT NULL,\n" +
@@ -61,10 +57,10 @@ public class DemoApplication implements CommandLineRunner {
 //                "tutorial_id int NOT NULL,\n" +
 //                "PRIMARY KEY (id)\n" +
 //                ")");
-//        jdbcTemplate.execute("CREATE TABLE TutorialRating (\n" +
+//        jdbcTemplate.execute("CREATE TABLE Rating (\n" +
 //                "id int IDENTITY(1,1) NOT NULL,\n" +
 //                "tutorial_id int NOT NULL,\n" +
-//                "rating_id int NOT NULL,\n" +
+//                "rating int NOT NULL CHECK (value >= 1 AND value <= 5),\n" +
 //                "PRIMARY KEY (id)\n" +
 //                ")");
 //        jdbcTemplate.execute("ALTER TABLE Tutorial\n" +
@@ -75,9 +71,7 @@ public class DemoApplication implements CommandLineRunner {
 //                "ADD FOREIGN KEY (tutorial_id) REFERENCES Tutorial(id) ON DELETE CASCADE ON UPDATE CASCADE");
 //        jdbcTemplate.execute("ALTER TABLE TutorialTags\n" +
 //                "ADD FOREIGN KEY (tags_id) REFERENCES Tags(id) ON DELETE CASCADE ON UPDATE CASCADE");
-//        jdbcTemplate.execute("ALTER TABLE TutorialRating\n" +
+//        jdbcTemplate.execute("ALTER TABLE Rating\n" +
 //                "ADD FOREIGN KEY (tutorial_id) REFERENCES Tutorial(id) ON DELETE CASCADE ON UPDATE CASCADE");
-//        jdbcTemplate.execute("ALTER TABLE TutorialRating\n" +
-//                "ADD FOREIGN KEY (rating_id) REFERENCES Rating(id) ON DELETE CASCADE ON UPDATE CASCADE");
     }
 }

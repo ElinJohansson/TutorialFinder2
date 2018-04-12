@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.domain.Format;
 import com.example.demo.domain.Language;
+import com.example.demo.domain.Tag;
 import com.example.demo.domain.Tutorial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -278,7 +279,7 @@ public class TutorialRepository implements Repository {
     }
 
     @Override
-    public List<Tutorial> getTutorialsByLanguage(List<String> languages, List<String> formats) {
+    public List<Tutorial> getTutorialsByLanguage(List<String> languages, List<String> formats, List<String> tags) {
         StringBuilder sb = new StringBuilder();
 
         if (languages != null) { //if it contains an empty string from js
@@ -311,32 +312,58 @@ public class TutorialRepository implements Repository {
         }
         String format = sb2.toString();
 
-        System.out.println("select t.id,t.title,descr = cast(t.descr as varchar(max)),t.format_id,t.language_id,t.url,f.name as format,l.name as language,\n" +
-                "\tt.creationDate,avg(tr.rating_id) as avgRating\n" +
+        StringBuilder sb3 = new StringBuilder();
+        if (tags != null) { //if it contains an empty string from js
+            if (formats != null || languages != null)
+                sb3.append(" and ");
+
+            sb3.append("(");
+            for (int i = 0; i < tags.size(); i++) {
+                if (i == 0) {
+                    sb3.append(" Tags.name = ?");
+                } else {
+                    sb3.append(" or Tags.name = ?");
+                }
+            }
+            sb3.append(")");
+        }
+        String tag = sb3.toString();
+        String query = "select t.id,Tags.name,t.title,descr = cast(t.descr as varchar(max)),t.format_id,t.language_id,t.url,f.name as format,l.name as language,\n" +
+                "\tt.creationDate,round(avg(cast(tr.rating as float)), 1) as avgRating\n" +
                 "from Tutorial as t\n" +
                 "join Format as f\n" +
                 "on t.format_id = f.id\n" +
                 "join Language as l\n" +
                 "on t.language_id = l.id\n" +
-                "left join TutorialRating as tr\n" +
+                "left join Rating as tr\n" +
                 "on t.id = tr.tutorial_id\n" +
-                "where  " + questionMarks + format + "\n" +
-                "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) ");
+                "inner join TutorialTags as tt\n" +
+                " on tt.tutorial_id = t.id\n" +
+                " inner join Tags \n" +
+                " on Tags.id = tt.tags_id" +
+                " where " + questionMarks + format + tag + "\n" +
+                "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) " +
+                "order by avgRating DESC";
 
+        System.out.println(query);
 
         try (Connection conn = dataSource.getConnection();
 
-             PreparedStatement ps = conn.prepareStatement("select t.id,t.title,descr = cast(t.descr as varchar(max)),t.format_id,t.language_id,t.url,f.name as format,l.name as language,\n" +
+             PreparedStatement ps = conn.prepareStatement("select t.id,Tags.name,t.title,descr = cast(t.descr as varchar(max)),t.format_id,t.language_id,t.url,f.name as format,l.name as language,\n" +
                      "\tt.creationDate,round(avg(cast(tr.rating as float)), 1) as avgRating\n" +
                      "from Tutorial as t\n" +
                      "join Format as f\n" +
-                     "on t.format_id = f.id\n" +    
+                     "on t.format_id = f.id\n" +
                      "join Language as l\n" +
                      "on t.language_id = l.id\n" +
                      "left join Rating as tr\n" +
                      "on t.id = tr.tutorial_id\n" +
-                     "where " + questionMarks + format + "\n" +
-                     "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) " +
+                     "inner join TutorialTags as tt\n" +
+                     " on tt.tutorial_id = t.id\n" +
+                     " inner join Tags \n" +
+                     " on Tags.id = tt.tags_id\n" +
+                     "  where " +questionMarks+format+tag+"\n" +
+                     "group by t.id ,t.title, t.format_id, t.language_id, Tags.name, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) \n" +
                      "order by avgRating DESC")) {
 
             int startI = 0;
@@ -347,13 +374,23 @@ public class TutorialRepository implements Repository {
                 }
             }
 
-
+            int startF = startI;
             if (formats != null) {
+                startF+=formats.size();
                 for (int i = 0; i < formats.size(); i++) {
                     ps.setString(i + startI + 1, formats.get(i));
                 }
             }
-            if (!(formats == null && languages == null)) {
+
+
+            if (tags != null) {
+                for (int i = 0; i < tags.size(); i++) {
+                    ps.setString(i + startF + 1, tags.get(i));
+                }
+            }
+
+
+            if (!(formats == null && languages == null && tags == null)) {
 
                 ResultSet results = ps.executeQuery();
                 List<Tutorial> tutorials = new ArrayList<>();
@@ -464,6 +501,25 @@ public class TutorialRepository implements Repository {
         {
             throw new TutorialRepositoryException("Unable to fetch toplist from database", e);
         }
+    }
+
+    @Override
+    public List<String> getTags() {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT name FROM Tags")) {
+            ResultSet results = ps.executeQuery();
+
+            List<String> tags = new ArrayList<>();
+
+            while (results.next()) {
+                tags.add(results.getString("name"));
+            }
+            return tags;
+
+        } catch (SQLException e) {
+            throw new TutorialRepositoryException("Unable to fetch format from database", e);
+        }
+
     }
 }
 

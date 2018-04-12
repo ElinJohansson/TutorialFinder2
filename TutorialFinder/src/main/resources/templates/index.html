@@ -31,6 +31,12 @@
                 <span class="checkBoxSpan" th:text="${language.name}"></span>
             </div>
 
+            <p>Tags:</p>
+            <div class="wrapper" th:each="tag : ${tags}">
+                <input type="checkbox" class="tagCheckbox" th:value="${tag}"/>
+                <span class="checkBoxSpan" th:text="${tag}"></span>
+            </div>
+
 
 
         </div>

@@ -37,6 +37,15 @@
             <ul id="returnedLanguages">
             </ul>
         </div>
+        <div class="topResults">
+            <h3>Toplist</h3>
+            <ol >
+                <li th:each="tutorial : ${topList}">
+                    <p th:text="${tutorial.title}"></p>
+                    <a th:text="${tutorial.url}" th:href="@{${tutorial.url}}" target="_blank"></a>
+                </li>
+            </ol>
+        </div>
     </div>
 
 </div>

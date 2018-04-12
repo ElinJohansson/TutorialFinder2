@@ -42,7 +42,7 @@ function render(tutorialList) {
 
             "<h4 >Title: <span class=\"title\">" + tutorialList[i].title + "</span></h4>" +
             "<h4>Average Rating: <span>" + tutorialList[i].avgRating + "</span></h4>\n" +
-            "<h4>URL: <span>" + tutorialList[i].url + "</span></h4>\n" +
+            "<h4>URL: <span> " + "<a href=\""+ tutorialList[i].url + "\" target=\"_blank\">" + tutorialList[i].url + "</a>" +"</span></h4>\n"  +
             "<h4>Year added: <span>" + tutorialList[i].creationDate.year + "</span></h4>\n" +
             "<h4>Description: <span>" + tutorialList[i].descr + "</span></h4>\n" +
 

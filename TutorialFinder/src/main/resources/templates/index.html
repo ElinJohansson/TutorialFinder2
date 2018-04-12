@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>
+    <title>Admin</title>
+
+</head>
+<body>
+
+
+<h2>TeachMe - Tech:</h2>
+
+<h3>Select all that apply:</h3>
+<p>Language:</p>
+<div class="wrapper" th:each="language : ${languages}">
+    <input type="checkbox" class="languageCheckbox" th:value="${language.name}"/>
+    <span class="checkBoxSpan" th:text="${language.name}"></span>
+</div>
+
+<h3>Select the formats you'd like to see:</h3>
+<p>Format:</p>
+<div class="wrapper" th:each="format : ${formats}">
+    <input type="checkbox" class="formatCheckbox" th:value="${format.name}"/>
+    <span class="checkBoxSpan" th:text="${format.name}"></span>
+</div>
+
+<ul id="returnedLanguages">
+
+</ul>
+
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -18,7 +18,7 @@ SCROLLBAR-DARKSHADOW-COLOR: #FFFFFF;
 	font-family: verdana;
 	font-size: 1.0em;
 	font-style: normal;
-	color: #ccc000;
+	color: #444445;
 	text-decoration: none;
 } 
 
@@ -63,14 +63,14 @@ a:active {
 
 						/* tabeller */
 .rubrik {
-  background-color: #BD9B50;
+  background-color: #3FB5AA;
   color: black;
 }
 .dark {
-  background-color: #E3BE67;
+  background-color: #949494;
   color: black;
 }
 .light {
-  background-color: #AC7831;
+  background-color: #CFCFCF;
   color: black;
 }

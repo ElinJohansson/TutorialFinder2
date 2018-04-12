@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +31,8 @@ public class TutorialController {
     }
 
     @GetMapping("/index")
-    public ModelAndView getTutorialsByFilter() {
+    public ModelAndView getTutorialsByFilter(HttpSession session) {
+        session.setAttribute("votedTitles", "");
         List<Tutorial> tutorials = repository.getTutorials();
         List<Language> languages = repository.getLanguages();
         List<Tutorial> topList = repository.getToplist();
@@ -89,9 +92,14 @@ public class TutorialController {
     }
 
     @PostMapping("/addRating")
-    public @ResponseBody void postRating(@RequestParam String rating, @RequestParam String title) {
-        int rate = Integer.parseInt(rating);
-        repository.addRatingToTutorial(title, rate);
+    public @ResponseBody
+    void postRating(@RequestParam String rating, @RequestParam String title, HttpSession session) {
+        String votedTitles = (String) session.getAttribute("votedTitles");
+
+        if (votedTitles.indexOf(title) < 0) {
+            session.setAttribute("votedTitles", session.getAttribute("votedTitles") + "~" + title);
+            int rate = Integer.parseInt(rating);
+        }
     }
 
 }

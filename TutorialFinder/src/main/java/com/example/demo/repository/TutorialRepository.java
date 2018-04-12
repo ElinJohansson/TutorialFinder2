@@ -311,19 +311,6 @@ public class TutorialRepository implements Repository {
         }
         String format = sb2.toString();
 
-        System.out.println("select t.id,t.title,descr = cast(t.descr as varchar(max)),t.format_id,t.language_id,t.url,f.name as format,l.name as language,\n" +
-                "\tt.creationDate,avg(tr.rating_id) as avgRating\n" +
-                "from Tutorial as t\n" +
-                "join Format as f\n" +
-                "on t.format_id = f.id\n" +
-                "join Language as l\n" +
-                "on t.language_id = l.id\n" +
-                "left join TutorialRating as tr\n" +
-                "on t.id = tr.tutorial_id\n" +
-                "where  " + questionMarks + format + "\n" +
-                "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) ");
-
-
         try (Connection conn = dataSource.getConnection();
 
              PreparedStatement ps = conn.prepareStatement("select t.id,t.title,descr = cast(t.descr as varchar(max)),t.format_id,t.language_id,t.url,f.name as format,l.name as language,\n" +

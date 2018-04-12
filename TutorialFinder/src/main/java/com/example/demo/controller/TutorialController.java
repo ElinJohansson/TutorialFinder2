@@ -60,7 +60,7 @@ public class TutorialController {
     }
 
 
-    @PostMapping("/addRating")
+    @PostMapping("/adminRating")
     public String getInfoFromAddTutorialForm(@RequestParam String title, @RequestParam int rating) {
         repository.addRatingToTutorial(title, rating);
         return "redirect:/admin";
@@ -83,6 +83,11 @@ public class TutorialController {
 
         List<Tutorial> tutorials = repository.getTutorialsByLanguage(languages, formats);
         return tutorials;
+    }
+
+    @PostMapping("addRating")
+    public void postRating(@RequestParam int rating, String title) {
+        repository.addRatingToTutorial(title, rating);
     }
 
 }

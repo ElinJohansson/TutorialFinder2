@@ -1,7 +1,6 @@
 body {
     background-color: crimson;
-    font-family: verdana, sans-serif;
-    font-size: 10px;
+    font-family: verdana;
 
     /* Scroll utseende */
     SCROLLBAR-FACE-COLOR: #FFFFFF;
@@ -39,15 +38,20 @@ body {
 }
 
 li {
-    font-size: 1.3em;
+    font-size: 1.0em;
+    font-family: Verdana;
 }
 
 h4{
+    font-size: 1.0em;
     font-weight: bold;
+    font-family: Verdana;
 }
 span{
-    font-size: 1.3em;
+    font-size: 1.0em;
     font-weight: normal;
+    font-family: Verdana;
+    vertical-align: center;
 }
 
 

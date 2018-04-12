@@ -34,17 +34,16 @@ public class TutorialController {
 //        return new ModelAndView("Filtertabell").addObject("languages", languages);
 //
 //    }
-    @GetMapping("/FilterTabell")
+    @GetMapping("/index")
     public ModelAndView getTutorialsByFilter(){
         List <Tutorial> tutorials = repository.getTutorials();
         List <Language> languages = repository.getLanguages();
 
         List <Format> formats = repository.getFormats();
-        return new ModelAndView("Filtertabell")
+        return new ModelAndView("index")
                 .addObject("tutorials", tutorials)
                 .addObject("languages", languages)
                 .addObject("formats", formats);
-
     }
 
     @PostMapping("/addTutorial")

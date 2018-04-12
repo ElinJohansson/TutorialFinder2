@@ -252,7 +252,7 @@ public class TutorialRepository implements Repository {
                      "    left join Rating as tr\n" +
                      "        on t.id = tr.tutorial_id\n" +
                      "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) " +
-                     "order by avgRating")) {
+                     "order by avgRating DESC")) {
             ResultSet results = ps.executeQuery();
 
             List<Tutorial> tutorials = new ArrayList<>();
@@ -337,7 +337,7 @@ public class TutorialRepository implements Repository {
                      "on t.id = tr.tutorial_id\n" +
                      "where " + questionMarks + format + "\n" +
                      "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) " +
-                     "order by avgRating")) {
+                     "order by avgRating DESC")) {
 
             int startI = 0;
             if (languages != null) {

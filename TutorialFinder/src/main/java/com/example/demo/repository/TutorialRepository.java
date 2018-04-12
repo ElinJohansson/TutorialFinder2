@@ -11,8 +11,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.demo.domain.Tutorial;
-
 @Component
 public class TutorialRepository implements Repository {
 
@@ -52,8 +50,8 @@ public class TutorialRepository implements Repository {
         }
     }
 
-
-    private int getFormatId(String format) {
+    @Override
+    public int getFormatId(String format) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT id FROM format WHERE name = ?")) {
             ps.setString(1, format);
@@ -62,12 +60,12 @@ public class TutorialRepository implements Repository {
                 return results.getInt("id");
             }
         } catch (SQLException e) {
-            throw new TutorialRepositoryException("Unable to fetch id from database", e);
+            throw new TutorialRepositoryException("Unable to fetch formatid from database", e);
         }
         return -1;
     }
 
-    public int getLanguageId(String name) {
+    private int getLanguageId(String name) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT id FROM Language WHERE name = ?")) {
             ps.setString(1, name);
@@ -76,7 +74,7 @@ public class TutorialRepository implements Repository {
                 return results.getInt("id");
             }
         } catch (SQLException e) {
-            throw new TutorialRepositoryException("Unable to fetch id from database", e);
+            throw new TutorialRepositoryException("Unable to fetch languageid from database", e);
         }
         return -1;
     }
@@ -180,7 +178,7 @@ public class TutorialRepository implements Repository {
                 return results.getInt("id");
             }
         } catch (SQLException e) {
-            throw new TutorialRepositoryException("Unable to fetch id from database", e);
+            throw new TutorialRepositoryException("Unable to fetch tutorialid from database", e);
         }
         return -1;
     }
@@ -194,7 +192,7 @@ public class TutorialRepository implements Repository {
                 return results.getInt("id");
             }
         } catch (SQLException e) {
-            throw new TutorialRepositoryException("Unable to fetch id from database", e);
+            throw new TutorialRepositoryException("Unable to fetch tagid from database", e);
         }
         return -1;
     }
@@ -208,7 +206,7 @@ public class TutorialRepository implements Repository {
                 return results.getInt("id");
             }
         } catch (SQLException e) {
-            throw new TutorialRepositoryException("Unable to fetch id from database", e);
+            throw new TutorialRepositoryException("Unable to fetch tutorialid from database", e);
         }
         return -1;
     }
@@ -226,9 +224,8 @@ public class TutorialRepository implements Repository {
                 languages.add(new Language(results.getString("name")));
             }
             return languages;
-        } catch (SQLException e)
-        {
-            throw new TutorialRepositoryException("Unable to fetch id from database", e);
+        } catch (SQLException e) {
+            throw new TutorialRepositoryException("Unable to fetch language from database", e);
         }
     }
 
@@ -276,7 +273,7 @@ public class TutorialRepository implements Repository {
         } catch (SQLException e)
 
         {
-            throw new TutorialRepositoryException("Unable to fetch id from database1", e);
+            throw new TutorialRepositoryException("Unable to fetch tutorial from database", e);
         }
     }
 
@@ -379,7 +376,7 @@ public class TutorialRepository implements Repository {
         } catch (SQLException e)
 
         {
-            throw new TutorialRepositoryException("Unable to fetch id from database1", e);
+            throw new TutorialRepositoryException("Unable to fetch tutorials from database", e);
         }
         return null;
     }
@@ -398,7 +395,7 @@ public class TutorialRepository implements Repository {
             return formats;
 
         } catch (SQLException e) {
-            throw new TutorialRepositoryException("Unable to fetch id from database", e);
+            throw new TutorialRepositoryException("Unable to fetch format from database", e);
         }
     }
 

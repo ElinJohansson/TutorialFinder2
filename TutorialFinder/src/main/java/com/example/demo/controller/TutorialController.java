@@ -24,16 +24,16 @@ public class TutorialController {
     private Repository repository;
 
     @GetMapping("/admin")
-    public ModelAndView getAdminPage(){
+    public ModelAndView getAdminPage() {
         return new ModelAndView("admin");
     }
 
     @GetMapping("/index")
-    public ModelAndView getTutorialsByFilter(){
-        List <Tutorial> tutorials = repository.getTutorials();
-        List <Language> languages = repository.getLanguages();
+    public ModelAndView getTutorialsByFilter() {
+        List<Tutorial> tutorials = repository.getTutorials();
+        List<Language> languages = repository.getLanguages();
 
-        List <Format> formats = repository.getFormats();
+        List<Format> formats = repository.getFormats();
         return new ModelAndView("index")
                 .addObject("tutorials", tutorials)
                 .addObject("languages", languages)
@@ -47,7 +47,7 @@ public class TutorialController {
         //To get multiple tags from tag-string
         List<String> tags = Arrays.asList(tag.trim().split(" +"));
         repository.createTutorial(title, descr, language, format, url);
-        repository.addTagsToTutorial(tags,title);
+        repository.addTagsToTutorial(tags, title);
         return "redirect:/admin";
     }
 
@@ -55,7 +55,7 @@ public class TutorialController {
     public String getInfoFromAddTutorialForm(@RequestParam String title, @RequestParam String tag) {
         //To get multiple tags from tag-string
         List<String> tags = Arrays.asList(tag.trim().split(" +"));
-        repository.addTagsToTutorial(tags,title);
+        repository.addTagsToTutorial(tags, title);
         return "redirect:/admin";
     }
 
@@ -68,26 +68,28 @@ public class TutorialController {
 
     //Getmapping för ajaxanropet
     @GetMapping("/filterOnLanguage")
-    public @ResponseBody List<Tutorial> getFilterOnLanguage(@RequestParam String language, @RequestParam String format){
+    public @ResponseBody
+    List<Tutorial> getFilterOnLanguage(@RequestParam String language, @RequestParam String format) {
         System.out.println("ajax request successful");
-        if(language == null){
+        if (language == null) {
             throw new TutorialRepositoryException("No language was checked");
         }
 
         List<String> languages = null;
-        if(language != null && language.trim().length() > 0)
+        if (language != null && language.trim().length() > 0)
             languages = new ArrayList<String>(Arrays.asList(language.split(",")));
         List<String> formats = null;
-        if(format != null && format.trim().length() > 0)
+        if (format != null && format.trim().length() > 0)
             formats = new ArrayList<String>(Arrays.asList(format.split(",")));
 
         List<Tutorial> tutorials = repository.getTutorialsByLanguage(languages, formats);
         return tutorials;
     }
 
-    @PostMapping("addRating")
-    public void postRating(@RequestParam int rating, String title) {
-        repository.addRatingToTutorial(title, rating);
+    @PostMapping("/addRating")
+    public @ResponseBody void postRating(@RequestParam String rating, @RequestParam String title) {
+        int rate = Integer.parseInt(rating);
+        repository.addRatingToTutorial(title, rate);
     }
 
 }

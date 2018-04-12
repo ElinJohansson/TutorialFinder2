@@ -60,7 +60,7 @@ public class DemoApplication implements CommandLineRunner {
 //        jdbcTemplate.execute("CREATE TABLE Rating (\n" +
 //                "id int IDENTITY(1,1) NOT NULL,\n" +
 //                "tutorial_id int NOT NULL,\n" +
-//                "rating int NOT NULL,\n" +
+//                "rating int NOT NULL CHECK (value >= 1 AND value <= 5),\n" +
 //                "PRIMARY KEY (id)\n" +
 //                ")");
 //        jdbcTemplate.execute("ALTER TABLE Tutorial\n" +

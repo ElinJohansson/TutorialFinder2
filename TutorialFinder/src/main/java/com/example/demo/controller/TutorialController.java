@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 
 import com.example.demo.domain.Language;
-import com.example.demo.domain.Tag;
 import com.example.demo.repository.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,7 +52,7 @@ public class TutorialController {
 
     @PostMapping("/addRating")
     public String getInfoFromAddTutorialForm(@RequestParam String title, @RequestParam int rating) {
-        repository.addRatingtToTutorial(title, rating);
+        repository.addRatingToTutorial(title, rating);
         return "redirect:/admin";
     }
 

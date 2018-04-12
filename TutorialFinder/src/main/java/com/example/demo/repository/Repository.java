@@ -18,5 +18,5 @@ public interface Repository {
 
     List<Language> getLanguages();
 
-    void addRatingtToTutorial(String title, int rating);
+    void addRatingToTutorial(String title, int rating);
 }

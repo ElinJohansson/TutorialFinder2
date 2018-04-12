@@ -23,14 +23,27 @@ body {
 .filterWrapper{
     background: #ffffff;
     display: inline-block;
+    min-width: 200px;
+    max-width: 200px;
 }
 .filterResults{
     background: #f0f0f0;
     display: inline-block;
+    flex-grow: 3;
+
 }
 .innerWrapper{
     background: #61482E;
     display: flex;
+    justify-content: space-between;
+}
+
+li {
+    font-size: 1.3em;
+}
+
+h4{
+    font-weight: bold;
 }
 
 

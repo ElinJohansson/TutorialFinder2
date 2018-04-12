@@ -115,3 +115,7 @@ a:active {
     background-color: #CFCFCF;
     color: black;
 }
+
+.hidden {
+    display: none;
+}

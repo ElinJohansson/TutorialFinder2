@@ -243,7 +243,7 @@ public class TutorialRepository implements Repository {
                      "    ,f.name as format\n" +
                      "    ,l.name as language\n" +
                      "    ,t.creationDate" +
-                     "    ,avg(tr.rating) as avgRating\n" +
+                     "    ,round(avg(cast(tr.rating as float)), 1)  as avgRating\n" +
                      "from Tutorial as t\n" +
                      "    join Format as f\n" +
                      "        on t.format_id = f.id  \n" +
@@ -327,10 +327,10 @@ public class TutorialRepository implements Repository {
         try (Connection conn = dataSource.getConnection();
 
              PreparedStatement ps = conn.prepareStatement("select t.id,t.title,descr = cast(t.descr as varchar(max)),t.format_id,t.language_id,t.url,f.name as format,l.name as language,\n" +
-                     "\tt.creationDate,avg(tr.rating) as avgRating\n" +
+                     "\tt.creationDate,round(avg(cast(tr.rating as float)), 1) as avgRating\n" +
                      "from Tutorial as t\n" +
                      "join Format as f\n" +
-                     "on t.format_id = f.id\n" +
+                     "on t.format_id = f.id\n" +    
                      "join Language as l\n" +
                      "on t.language_id = l.id\n" +
                      "left join Rating as tr\n" +

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,17 +30,20 @@ public class TutorialController {
     }
 
     @GetMapping("/index")
-    public ModelAndView getTutorialsByFilter() {
+    public ModelAndView getTutorialsByFilter(HttpSession session) {
+        session.setAttribute("votedTitles", "");
         List<Tutorial> tutorials = repository.getTutorials();
         List<Language> languages = repository.getLanguages();
         List<Tutorial> topList = repository.getToplist();
         List<Format> formats = repository.getFormats();
+        List<String> tags = repository.getTags();
 
         return new ModelAndView("index")
                 .addObject("tutorials", tutorials)
                 .addObject("languages", languages)
                 .addObject("formats", formats)
-                .addObject("topList", topList);
+                .addObject("topList", topList)
+                .addObject("tags", tags);
     }
 
     @PostMapping("/addTutorial")
@@ -71,7 +75,7 @@ public class TutorialController {
     //Getmapping för ajaxanropet
     @GetMapping("/filterOnLanguage")
     public @ResponseBody
-    List<Tutorial> getFilterOnLanguage(@RequestParam String language, @RequestParam String format) {
+    List<Tutorial> getFilterOnLanguage(@RequestParam String language, @RequestParam String format, @RequestParam String tag) {
         System.out.println("ajax request successful");
         if (language == null) {
             throw new TutorialRepositoryException("No language was checked");
@@ -83,15 +87,23 @@ public class TutorialController {
         List<String> formats = null;
         if (format != null && format.trim().length() > 0)
             formats = new ArrayList<String>(Arrays.asList(format.split(",")));
+        List<String> tags = null;
+        if (tag != null && tag.trim().length() > 0)
+            tags = new ArrayList<String>(Arrays.asList(tag.split(",")));
 
-        List<Tutorial> tutorials = repository.getTutorialsByLanguage(languages, formats);
+        List<Tutorial> tutorials = repository.getTutorialsByLanguage(languages, formats, tags);
         return tutorials;
     }
 
     @PostMapping("/addRating")
-    public @ResponseBody void postRating(@RequestParam String rating, @RequestParam String title) {
-        int rate = Integer.parseInt(rating);
-        repository.addRatingToTutorial(title, rate);
+    public @ResponseBody
+    void postRating(@RequestParam String rating, @RequestParam String title, HttpSession session) {
+        String votedTitles = (String) session.getAttribute("votedTitles");
+
+        if (votedTitles.indexOf(title) < 0) {
+            session.setAttribute("votedTitles", session.getAttribute("votedTitles") + "~" + title);
+            int rate = Integer.parseInt(rating);
+        }
     }
 
 }

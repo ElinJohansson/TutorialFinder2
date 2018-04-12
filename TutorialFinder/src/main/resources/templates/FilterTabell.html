@@ -2,46 +2,31 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Admin</title>
+
 </head>
 <body>
 
-<h2>Tabell filtrering:</h2>
+<h2>TeachMe - Tech:</h2>
 
+<h3>Select all that apply:</h3>
+<p>Language:</p>
+<div class="wrapper" th:each="language : ${languages}">
+    <input type="checkbox" class="languageCheckbox" th:value="${language.name}"/>
+    <span class="checkBoxSpan" th:text="${language.name}"></span>
+</div>
 
-<ol>
-    <li th:each="language : ${languages}">
-        <p th:text="${language.name}"></p>
-    </li>
-</ol>
+<h3>Select the formats you'd like to see:</h3>
+<p>Format:</p>
+<div class="wrapper" th:each="format : ${formats}">
+    <input type="checkbox" class="formatCheckbox" th:value="${format.name}"/>
+    <span class="checkBoxSpan" th:text="${format.name}"></span>
+</div>
 
-<table>
-    <th:block th:each="tutorial : ${tutorials}">
-        <tr>
-            <td th:text="${tutorial.id}">...</td>
-            <td th:text="${tutorial.title}">...</td>
-            <td th:text="${tutorial.language}">...</td>
-            <td th:text="${tutorial.format}">...</td>
-            <td th:text="${tutorial.avgRating}">...</td>
-            <td th:text="${tutorial.creationDate}">...</td>
-            <td th:text="${tutorial.id}">...</td>
-            <td th:text="${tutorial.descr}">...</td>
-            <td th:text="${tutorial.url}">...</td>
-        </tr>
-    </th:block>
-</table>
+<ul id="returnedLanguages">
 
-<!--results.getLong("id"),-->
-<!--results.getString("title"),-->
-<!--results.getString("language"),-->
-<!--results.getString("format"),-->
-<!--results.getDouble("avgRating"),-->
-<!--results.getTimestamp("creationDate").toLocalDateTime(),-->
-<!--results.getString("descr"),-->
-<!--results.getString("url")));-->
-
-
-
+</ul>
 
 
 <!--<h2>Add tag to tutorial:</h2>-->
@@ -49,6 +34,6 @@
 <!--<p>Tag name:</p><input type="text" name="tag">-->
 <!--<input type="submit" value="Add tag">-->
 <!--</form>-->
-
+<script src="script.js"></script>
 </body>
 </html>

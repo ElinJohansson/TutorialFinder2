@@ -27,7 +27,7 @@ public interface Repository {
     List<Tutorial> getTutorials();
 
 
-    List<Tutorial> getTutorialsByLanguage(List<String> languages, List<String> formats);
+    List<Tutorial> getTutorialsByLanguage(List<String> languages, List<String> formats, List<String> tags);
 
     List<Format> getFormats();
 

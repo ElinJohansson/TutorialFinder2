@@ -77,7 +77,7 @@ public class TutorialController {
     //Getmapping för ajaxanropet
     @GetMapping("/filterOnLanguage")
     public @ResponseBody
-    List<Tutorial> getFilterOnLanguage(@RequestParam String language, @RequestParam String format) {
+    List<Tutorial> getFilterOnLanguage(@RequestParam String language, @RequestParam String format, @RequestParam String tag) {
         System.out.println("ajax request successful");
         if (language == null) {
             throw new TutorialRepositoryException("No language was checked");
@@ -89,8 +89,11 @@ public class TutorialController {
         List<String> formats = null;
         if (format != null && format.trim().length() > 0)
             formats = new ArrayList<String>(Arrays.asList(format.split(",")));
+        List<String> tags = null;
+        if (tag != null && tag.trim().length() > 0)
+            tags = new ArrayList<String>(Arrays.asList(tag.split(",")));
 
-        List<Tutorial> tutorials = repository.getTutorialsByLanguage(languages, formats);
+        List<Tutorial> tutorials = repository.getTutorialsByLanguage(languages, formats, tags);
         return tutorials;
     }
 

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Format;
 import com.example.demo.domain.Language;
+import com.example.demo.domain.Tag;
 import com.example.demo.domain.Tutorial;
 import com.example.demo.repository.Repository;
 import com.example.demo.repository.TutorialRepositoryException;
@@ -37,12 +38,14 @@ public class TutorialController {
         List<Language> languages = repository.getLanguages();
         List<Tutorial> topList = repository.getToplist();
         List<Format> formats = repository.getFormats();
+        List<String> tags = repository.getTags();
 
         return new ModelAndView("index")
                 .addObject("tutorials", tutorials)
                 .addObject("languages", languages)
                 .addObject("formats", formats)
-                .addObject("topList", topList);
+                .addObject("topList", topList)
+                .addObject("tags", tags);
     }
 
     @PostMapping("/addTutorial")
@@ -74,7 +77,7 @@ public class TutorialController {
     //Getmapping för ajaxanropet
     @GetMapping("/filterOnLanguage")
     public @ResponseBody
-    List<Tutorial> getFilterOnLanguage(@RequestParam String language, @RequestParam String format) {
+    List<Tutorial> getFilterOnLanguage(@RequestParam String language, @RequestParam String format, @RequestParam String tag) {
         System.out.println("ajax request successful");
         if (language == null) {
             throw new TutorialRepositoryException("No language was checked");
@@ -86,8 +89,11 @@ public class TutorialController {
         List<String> formats = null;
         if (format != null && format.trim().length() > 0)
             formats = new ArrayList<String>(Arrays.asList(format.split(",")));
+        List<String> tags = null;
+        if (tag != null && tag.trim().length() > 0)
+            tags = new ArrayList<String>(Arrays.asList(tag.split(",")));
 
-        List<Tutorial> tutorials = repository.getTutorialsByLanguage(languages, formats);
+        List<Tutorial> tutorials = repository.getTutorialsByLanguage(languages, formats, tags);
         return tutorials;
     }
 

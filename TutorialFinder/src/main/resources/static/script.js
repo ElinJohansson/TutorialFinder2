@@ -62,12 +62,16 @@ function renderTutorials() {
     var checkedBoxes = $("input[type=\"checkbox\"]:checked");
     var language = "";
     var format = "";
+    var tag = "";
     for (var i = 0; i < checkedBoxes.length; i++) {
         if ($(checkedBoxes[i]).hasClass("languageCheckbox")) {
             language += $(checkedBoxes[i]).val() + ",";
         }
         if ($(checkedBoxes[i]).hasClass("formatCheckbox")) {
             format += $(checkedBoxes[i]).val() + ",";
+        }
+        if ($(checkedBoxes[i]).hasClass("tagCheckbox")) {
+            tag += $(checkedBoxes[i]).val() + ",";
         }
     }
 
@@ -81,7 +85,8 @@ function renderTutorials() {
         },
         data: {
             language: language,
-            format: format
+            format: format,
+            tag: tag
         },
         url: "/filterOnLanguage", //which is mapped to its partner function on our controller class
         success: function (result) {

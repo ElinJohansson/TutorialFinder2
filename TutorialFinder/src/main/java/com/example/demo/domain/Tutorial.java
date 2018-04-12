@@ -6,15 +6,15 @@ import java.util.ArrayList;
 public class Tutorial {
     private final long id;
     private final String title;
-    private final Language language;
-    private final Format format;
-    private final Rating avgRating;
+    private final String language;
+    private final String format;
+    private final double avgRating;
     private ArrayList<Tag> tags = null;
     private final LocalDateTime creationDate;
     private final String descr;
     private final String url;
 
-    public Tutorial(long id, String title, Language language, Format format, Rating avgRating, LocalDateTime creationDate, String descr, String url) {
+    public Tutorial(long id, String title, String language, String format, double avgRating, LocalDateTime creationDate, String descr, String url) {
         this.id = id;
         this.title = title;
         this.language = language;
@@ -34,15 +34,27 @@ public class Tutorial {
         return id;
     }
 
-    public Language getLanguage() {
+    public String getTitle() {
+        return title;
+    }
+
+    public double getAvgRating() {
+        return avgRating;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getLanguage() {
         return language;
     }
 
-    public Format getFormat() {
+    public String getFormat() {
         return format;
     }
 
-    public Rating getRating() {
+    public double getRating() {
         return avgRating;
     }
 

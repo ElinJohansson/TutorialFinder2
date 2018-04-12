@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.domain.Format;
 import com.example.demo.domain.Language;
 import com.example.demo.domain.Tutorial;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.demo.domain.Tutorial;
 
 @Component
 public class TutorialRepository implements Repository {
@@ -219,8 +222,8 @@ public class TutorialRepository implements Repository {
             List<Language> languages = new ArrayList<>();
 
 
-            while (results.next()){
-                languages.add(new Language (results.getString("name"), results.getInt("id")));
+            while (results.next()) {
+                languages.add(new Language(results.getString("name")));
             }
             return languages;
         } catch (SQLException e)
@@ -228,5 +231,173 @@ public class TutorialRepository implements Repository {
             throw new TutorialRepositoryException("Unable to fetch id from database", e);
         }
     }
+
+
+    @Override
+    public List<Tutorial> getTutorials() {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("select\n" +
+                     "    t.id\n" +
+                     "    ,t.title\n" +
+                     "    ,descr = cast(t.descr as varchar(max))\n" +
+                     "    ,t.format_id\n" +
+                     "    ,t.language_id\n" +
+                     "    ,t.url\n" +
+                     "    ,f.name as format\n" +
+                     "    ,l.name as language\n" +
+                     "    ,t.creationDate" +
+                     "    ,avg(tr.rating_id) as avgRating\n" +
+                     "from Tutorial as t\n" +
+                     "    join Format as f\n" +
+                     "        on t.format_id = f.id  \n" +
+                     "    join Language as l\n" +
+                     "        on t.language_id = l.id\n" +
+                     "    left join TutorialRating as tr\n" +
+                     "        on t.id = tr.tutorial_id\n" +
+                     "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) ")) {
+            ResultSet results = ps.executeQuery();
+
+            List<Tutorial> tutorials = new ArrayList<>();
+            System.out.println("hej");
+            while (results.next()) {
+                tutorials.add(new Tutorial(
+                        results.getLong("id"),
+                        results.getString("title"),
+                        results.getString("language"),
+                        results.getString("format"),
+                        results.getDouble("avgRating"),
+                        results.getTimestamp("creationDate").toLocalDateTime(),
+                        results.getString("descr"),
+                        results.getString("url")));
+            }
+            return tutorials;
+
+        } catch (SQLException e)
+
+        {
+            throw new TutorialRepositoryException("Unable to fetch id from database1", e);
+        }
     }
+
+    @Override
+    public List<Tutorial> getTutorialsByLanguage(List<String> languages, List<String> formats) {
+        StringBuilder sb = new StringBuilder();
+
+        if (languages != null) { //if it contains an empty string from js
+            sb.append("(");
+            for (int i = 0; i < languages.size(); i++) {
+                if (i == 0) {
+                    sb.append(" l.name = ?");
+                } else {
+                    sb.append(" or l.name = ?");
+                }
+            }
+            sb.append(")");
+        }
+        String questionMarks = sb.toString();
+
+        StringBuilder sb2 = new StringBuilder();
+        if (formats != null) { //if it contains an empty string from js
+            if (languages != null)
+                sb2.append(" and ");
+
+            sb2.append("(");
+            for (int i = 0; i < formats.size(); i++) {
+                if (i == 0) {
+                    sb2.append(" f.name = ?");
+                } else {
+                    sb2.append(" or f.name = ?");
+                }
+            }
+            sb2.append(")");
+        }
+        String format = sb2.toString();
+
+        System.out.println("select t.id,t.title,descr = cast(t.descr as varchar(max)),t.format_id,t.language_id,t.url,f.name as format,l.name as language,\n" +
+                "\tt.creationDate,avg(tr.rating_id) as avgRating\n" +
+                "from Tutorial as t\n" +
+                "join Format as f\n" +
+                "on t.format_id = f.id\n" +
+                "join Language as l\n" +
+                "on t.language_id = l.id\n" +
+                "left join TutorialRating as tr\n" +
+                "on t.id = tr.tutorial_id\n" +
+                "where  " + questionMarks + format + "\n" +
+                "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) ");
+
+
+        try (Connection conn = dataSource.getConnection();
+
+             PreparedStatement ps = conn.prepareStatement("select t.id,t.title,descr = cast(t.descr as varchar(max)),t.format_id,t.language_id,t.url,f.name as format,l.name as language,\n" +
+                     "\tt.creationDate,avg(tr.rating_id) as avgRating\n" +
+                     "from Tutorial as t\n" +
+                     "join Format as f\n" +
+                     "on t.format_id = f.id\n" +
+                     "join Language as l\n" +
+                     "on t.language_id = l.id\n" +
+                     "left join TutorialRating as tr\n" +
+                     "on t.id = tr.tutorial_id\n" +
+                     "where " + questionMarks + format + "\n" +
+                     "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) ")) {
+
+            int startI = 0;
+            if (languages != null) {
+                startI = languages.size();
+                for (int i = 0; i < languages.size(); i++) {
+                    ps.setString(i + 1, languages.get(i));
+                }
+            }
+
+
+            if (formats != null) {
+                for (int i = 0; i < formats.size(); i++) {
+                    ps.setString(i + startI + 1, formats.get(i));
+                }
+            }
+            if (!(formats == null && languages == null)) {
+
+                ResultSet results = ps.executeQuery();
+                List<Tutorial> tutorials = new ArrayList<>();
+
+                while (results.next()) {
+                    tutorials.add(new Tutorial(
+                            results.getLong("id"),
+                            results.getString("title"),
+                            results.getString("language"),
+                            results.getString("format"),
+                            results.getDouble("avgRating"),
+                            results.getTimestamp("creationDate").toLocalDateTime(),
+                            results.getString("descr"),
+                            results.getString("url")));
+                }
+                return tutorials;
+            }
+
+
+        } catch (SQLException e)
+
+        {
+            throw new TutorialRepositoryException("Unable to fetch id from database1", e);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Format> getFormats() {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT name FROM Format")) {
+            ResultSet results = ps.executeQuery();
+
+            List<Format> formats = new ArrayList<>();
+
+            while (results.next()) {
+                formats.add(new Format(results.getString("name")));
+            }
+            return formats;
+
+        } catch (SQLException e) {
+            throw new TutorialRepositoryException("Unable to fetch id from database", e);
+        }
+    }
+}
 

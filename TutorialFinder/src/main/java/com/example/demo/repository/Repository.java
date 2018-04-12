@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.domain.Format;
 import com.example.demo.domain.Language;
 import com.example.demo.domain.Tutorial;
 
@@ -19,6 +20,13 @@ public interface Repository {
 
     List<Language> getLanguages();
 
+    List<Tutorial> getTutorials();
 
+
+    List<Tutorial> getTutorialsByLanguage(List<String> languages, List<String> formats);
+
+    List<Format> getFormats();
+}
 
 }
+

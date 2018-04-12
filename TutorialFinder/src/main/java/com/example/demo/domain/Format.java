@@ -1,11 +1,11 @@
 package com.example.demo.domain;
 
 public class Format {
-    private final long id;
+    private  long id;
     private final String name;
 
-    public Format(long id, String name) {
-        this.id = id;
+    public Format(String name) {
+
         this.name = name;
     }
 

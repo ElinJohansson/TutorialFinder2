@@ -4,8 +4,8 @@ public class Language {
     private long id;
     private final String name;
 
-    public Language(String name, int id) {
-        this.id = id;
+    public Language(String name) {
+        //this.id = id;
         this.name = name;
     }
 

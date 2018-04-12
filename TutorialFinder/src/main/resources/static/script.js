@@ -39,11 +39,12 @@ function render(tutorialList) {
     for (var i = 0; i < tutorialList.length; i++) {
         $("#returnedLanguages").append("<li>" +
 
-            "<h4 >Title: <span class='' id=\"title\""+i+"\">"+ tutorialList[i].title +"</span></h4>" +
-            "<h4>Average Rating: <span>"+ tutorialList[i].avgRating +"</span></h4>\n" +
-            "<h4>URL: <span> " + "<a href=\"http://" + tutorialList[i].url + "\" target=\"_blank\">" + tutorialList[i].url + "</a>" +"</span></h4>\n" +
-            "<h4>Year added: <span>" + tutorialList[i].creationDate.year +"</span></h4>\n" +
-            "<h4>Description: <span>" + tutorialList[i].descr +"</span></h4>\n" +
+
+            "<h4 >Title: <span class=\"title\">" + tutorialList[i].title + "</span></h4>" +
+            "<h4>Average Rating: <span>" + tutorialList[i].avgRating + "</span></h4>\n" +
+            "<h4>URL: <span>" + tutorialList[i].url + "</span></h4>\n" +
+            "<h4>Year added: <span>" + tutorialList[i].creationDate.year + "</span></h4>\n" +
+            "<h4>Description: <span>" + tutorialList[i].descr + "</span></h4>\n" +
 
             "    <select name=\"rating\">\n" +
             "    <option value=\"1\">1</option>\n" +
@@ -52,26 +53,18 @@ function render(tutorialList) {
             "    <option value=\"4\">4</option>\n" +
             "    <option value=\"5\">5</option>\n" +
             "    </select>\n" +
-            "    <button class=\"button\">Rate me</button>\n"+"</li>"
-            );
+            "    <button class=\"button\">Rate me</button>\n" + "</li>"
+        );
     }
 
 
     $(".button").on("click", function (e) {
-        console.log("clicked add rating");
+        var rating = $(this).prev().val();
+        var tutorialTitle = $(this).closest("li").children(":first").children(":first").html();
 
-
-
-        var rating = e.target.previousSibling.value();
-
-            // $(".button").prev().val();
-       // var tutorialTitle = $(".button").closest("li").find("title").html;
-
-        console.log("rating "+rating);
-       // console.log("title "+tutorialTitle);
-
-         // var tutorialTitle = "Elins tutorial";
-
+        console.log("rating " + rating);
+        console.log("title " + tutorialTitle);
+        
         //ajaxanrop till controllern
         $.ajax({
             type: "POST",

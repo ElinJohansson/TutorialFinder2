@@ -3,6 +3,7 @@ $("input[type=\"checkbox\"]").on("click", renderTutorials);
 //Renders the tutorialList which is retrieved using the ajax request, the returned list is actually
 //an array which is why we're using a regular for loop
 function render(tutorialList) {
+    $(".instructions").remove();
     $("#returnedLanguages").html("");
     for (var i = 0; i < tutorialList.length; i++) {
         $("#returnedLanguages").append("<li>" +

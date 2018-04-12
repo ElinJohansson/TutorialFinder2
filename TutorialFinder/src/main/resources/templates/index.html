@@ -20,16 +20,16 @@
         <div class="filterWrapper">
             <h3>Select all that apply:</h3>
 
-            <p>Format:</p>
-            <div class="wrapper" th:each="format : ${formats}">
-                <input type="checkbox" class="formatCheckbox" th:value="${format.name}"/>
-                <span class="checkBoxSpan" th:text="${format.name}"></span>
-            </div>
-
             <p>Language:</p>
             <div class="wrapper" th:each="language : ${languages}">
                 <input type="checkbox" class="languageCheckbox" th:value="${language.name}"/>
                 <span class="checkBoxSpan" th:text="${language.name}"></span>
+            </div>
+
+            <p>Format:</p>
+            <div class="wrapper" th:each="format : ${formats}">
+                <input type="checkbox" class="formatCheckbox" th:value="${format.name}"/>
+                <span class="checkBoxSpan" th:text="${format.name}"></span>
             </div>
 
             <p>Tags:</p>
@@ -39,10 +39,23 @@
             </div>
 
 
-
         </div>
 
         <div class="filterResults">
+            <div class="instructions">
+                <h3>Welcome to TeachMe Tech!</h3>
+                <p>
+                    Nice to see you here.<br/><br/>
+                    So what language or technique are you curious about? Tick the relevant boxes.<br/>
+                    Then: Which format do you prefer? You guessed it, tick the box!<br/>
+                    The last step is to select the tags that fit your style.<br/>
+                    Also, please rate! It will help others to find the most relevant
+                    tutorials.
+                    <br/>
+                    <br/>
+                    Have fun and keep on learning!
+                </p>
+            </div>
             <ul id="returnedLanguages">
             </ul>
         </div>
@@ -56,7 +69,7 @@
             </ol>
         </div>
     </div>
-
+    <p>Suggest a tutorial? </p> <a href="mailto:teachmetech@gmail.com">Contact admin!</a>
 </div>
 <script src="script.js"></script>
 </body>

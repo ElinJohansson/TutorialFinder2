@@ -18,6 +18,13 @@
 
         <div class="filterWrapper">
             <h3>Select all that apply:</h3>
+          
+            <p>Format:</p>
+            <div class="wrapper" th:each="format : ${formats}">
+                <input type="checkbox" class="formatCheckbox" th:value="${format.name}"/>
+                <span class="checkBoxSpan" th:text="${format.name}"></span>
+            </div>
+
             <p>Language:</p>
             <div class="wrapper" th:each="language : ${languages}">
                 <input type="checkbox" class="languageCheckbox" th:value="${language.name}"/>
@@ -25,12 +32,7 @@
             </div>
 
 
-            <h3>Select the formats you'd like to see:</h3>
-            <p>Format:</p>
-            <div class="wrapper" th:each="format : ${formats}">
-                <input type="checkbox" class="formatCheckbox" th:value="${format.name}"/>
-                <span class="checkBoxSpan" th:text="${format.name}"></span>
-            </div>
+
         </div>
 
         <div class="filterResults">

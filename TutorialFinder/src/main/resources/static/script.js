@@ -49,9 +49,21 @@ function render(tutorialList) {
             "<p>Description:</p>\n" + tutorialList[i].descr +
             "<p>Format:</p>\n" + tutorialList[i].format +
             "<p>Language:</p>" + tutorialList[i].language +
-            "</li>");
+            "<form method=\"post\" action=\"addRating\">\n" +
+            "    <select name=\"rating\">\n" +
+            "    <option value=\"1\">1</option>\n" +
+            "    <option value=\"2\">2</option>\n" +
+            "    <option value=\"3\">3</option>\n" +
+            "    <option value=\"4\">4</option>\n" +
+            "    <option value=\"5\">5</option>\n" +
+            "    </select>\n" +
+            "    <input type=\"submit\" id=\"addRating\" value=\"Rate Tutorial\"/>\n" +
+            "    </form></li>");
     }
 }
+
+
+
 
 
 

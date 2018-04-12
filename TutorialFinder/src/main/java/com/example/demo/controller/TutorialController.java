@@ -70,6 +70,7 @@ public class TutorialController {
     public String getInfoFromAddTutorialForm(@RequestParam String title, @RequestParam int rating) {
         repository.addRatingToTutorial(title, rating);
         return "redirect:/admin";
+    }
 
     //Getmapping för ajaxanropet
     @GetMapping("/filterOnLanguage")

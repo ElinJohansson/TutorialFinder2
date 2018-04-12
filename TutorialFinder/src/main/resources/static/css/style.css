@@ -15,8 +15,8 @@ html{
 
 /* Textutseende */
 .outerWrapper{
-    background: #c0c0c0;
-    height: 100%;
+    /*background: #c0c0c0;*/
+    height: auto;
     border: 1px;
     border-color: black;
 }
@@ -35,7 +35,7 @@ html{
     display: inline-block;
     min-width: 200px;
     max-width: 200px;
-    /*height: 100%;*/
+    height: auto;
     padding: 5px;
     z-index: 3;
 
@@ -55,7 +55,7 @@ html{
     display: inline-block;
     flex-grow: 3;
     min-height:1000px;
-    /*height: 100%;*/
+    height: auto;
     padding: 5px;
                 /*padding: 10px;*/
                 /*z-index: 1;*/
@@ -63,7 +63,7 @@ html{
 .innerWrapper{
     background: #ffffff;
     display: flex;
-    height: 100%;
+    height: auto;
     min-height:1000px;
     justify-content: space-between;
             /*padding: 10px;*/
@@ -77,7 +77,7 @@ html{
     display: inline-block;
     min-width: 300px;
     max-width: 300px;
-    /*height: 100%;*/
+    height: auto;
     padding: 5px;
 }
 
@@ -264,4 +264,12 @@ button {
 .disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+.listcolor0 {
+    background-color: rgb(240, 240, 240);
+}
+
+.listcolor1 {
+    background-color: rgb(180, 180, 180);
 }

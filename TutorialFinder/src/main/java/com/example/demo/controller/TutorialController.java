@@ -1,16 +1,16 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.domain.Format;
 import com.example.demo.domain.Language;
-import com.example.demo.domain.Tag;
 import com.example.demo.domain.Tutorial;
 import com.example.demo.repository.Repository;
 import com.example.demo.repository.TutorialRepositoryException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -27,13 +27,7 @@ public class TutorialController {
     public ModelAndView getAdminPage(){
         return new ModelAndView("admin");
     }
-
-//    @GetMapping("/FilterTabell")              todo
-//    public ModelAndView getFilterTabellPage(){
-//        List <Language> languages = repository.getLanguages();
-//        return new ModelAndView("Filtertabell").addObject("languages", languages);
-//
-//    }
+    
     @GetMapping("/index")
     public ModelAndView getTutorialsByFilter(){
         List <Tutorial> tutorials = repository.getTutorials();
@@ -70,6 +64,7 @@ public class TutorialController {
     public String getInfoFromAddTutorialForm(@RequestParam String title, @RequestParam int rating) {
         repository.addRatingToTutorial(title, rating);
         return "redirect:/admin";
+    }
 
     //Getmapping för ajaxanropet
     @GetMapping("/filterOnLanguage")

@@ -419,5 +419,51 @@ public class TutorialRepository implements Repository {
         }
 
     }
+    @Override
+    public List<Tutorial> getToplist() {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("select top (10)\n" +
+                     "    t.id\n" +
+                     "    ,t.title\n" +
+                     "    ,descr = cast(t.descr as varchar(max))\n" +
+                     "    ,t.format_id\n" +
+                     "    ,t.language_id\n" +
+                     "    ,t.url\n" +
+                     "    ,f.name as format\n" +
+                     "    ,t.creationDate"+
+                     "    ,l.name as language\n" +
+                     "    ,avg(tr.rating) as AvgRating\n" +
+                     "from Tutorial as t\n" +
+                     "    join Format as f\n" +
+                     "        on t.format_id = f.id  \n" +
+                     "    join Language as l\n" +
+                     "        on t.language_id = l.id\n" +
+                     "    left join Rating as tr\n" +
+                     "        on t.id = tr.tutorial_id\n" +
+                     "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, t.creationDate, l.name, cast(t.descr as varchar(max))\n" +
+                     "order by avgRating desc")) {
+            ResultSet results = ps.executeQuery();
+
+            List<Tutorial> tutorials = new ArrayList<>();
+            System.out.println("hej");
+            while (results.next()) {
+                tutorials.add(new Tutorial(
+                        results.getLong("id"),
+                        results.getString("title"),
+                        results.getString("language"),
+                        results.getString("format"),
+                        results.getDouble("avgRating"),
+                        results.getTimestamp("creationDate").toLocalDateTime(),
+                        results.getString("descr"),
+                        results.getString("url")));
+            }
+            return tutorials;
+
+        } catch (SQLException e)
+
+        {
+            throw new TutorialRepositoryException("Unable to fetch toplist from database", e);
+        }
+    }
 }
 

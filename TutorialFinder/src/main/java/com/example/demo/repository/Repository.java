@@ -30,6 +30,8 @@ public interface Repository {
 
     List<Format> getFormats();
 
+    List<Tutorial> getToplist();
+
 }
 
 

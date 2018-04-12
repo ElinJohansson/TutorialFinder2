@@ -32,12 +32,14 @@ public class TutorialController {
     public ModelAndView getTutorialsByFilter() {
         List<Tutorial> tutorials = repository.getTutorials();
         List<Language> languages = repository.getLanguages();
-
+        List<Tutorial> topList = repository.getToplist();
         List<Format> formats = repository.getFormats();
+
         return new ModelAndView("index")
                 .addObject("tutorials", tutorials)
                 .addObject("languages", languages)
-                .addObject("formats", formats);
+                .addObject("formats", formats)
+                .addObject("topList", topList);
     }
 
     @PostMapping("/addTutorial")

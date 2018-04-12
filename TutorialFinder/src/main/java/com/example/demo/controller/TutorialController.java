@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Format;
 import com.example.demo.domain.Language;
-import com.example.demo.domain.Tag;
 import com.example.demo.domain.Tutorial;
 import com.example.demo.repository.Repository;
 import com.example.demo.repository.TutorialRepositoryException;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -26,7 +26,7 @@ public class DemoApplication implements CommandLineRunner {
 //                ")");
 //        jdbcTemplate.execute("CREATE TABLE Tutorial (\n" +
 //                "\tid int IDENTITY(1,1) NOT NULL,\n" +
-//                "\ttitle nvarchar(200) NOT NULL,\n" +
+//                "\ttitle nvarchar(200) NOT NULL UNIQUE,\n" +
 //                "\tdescr text NOT NULL,\n" +
 //                "\tcreationDate date NOT NULL,\n" +
 //                "\tlanguage_id int NOT NULL,\n" +
@@ -36,19 +36,19 @@ public class DemoApplication implements CommandLineRunner {
 //                ")");
 //        jdbcTemplate.execute("CREATE TABLE Language (\n" +
 //                "\tid int IDENTITY(1,1) NOT NULL,\n" +
-//                "\tname nvarchar(100) NOT NULL,\n" +
+//                "\tname nvarchar(100) NOT NULL UNIQUE,\n" +
 //                "\tPRIMARY KEY (id)\n" +
 //                "\n" +
 //                ")");
 //        jdbcTemplate.execute("CREATE TABLE Format (\n" +
 //                "\tid int IDENTITY(1,1) NOT NULL,\n" +
-//                "\tname nvarchar(100) NOT NULL,\n" +
+//                "\tname nvarchar(100) NOT NULL UNIQUE,\n" +
 //                "\tPRIMARY KEY (id)\n" +
 //                "\t)");
 
 //        jdbcTemplate.execute("CREATE TABLE Tags (\n" +
 //                "id int IDENTITY(1,1) NOT NULL,\n" +
-//                "name nvarchar(100) NOT NULL,\n" +
+//                "name nvarchar(100) NOT NULL UNIQUE,\n" +
 //                "PRIMARY KEY (id)\n" +
 //                ")");
 //        jdbcTemplate.execute("CREATE TABLE TutorialTags (\n" +

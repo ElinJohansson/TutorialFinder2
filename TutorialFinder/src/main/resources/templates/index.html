@@ -15,10 +15,9 @@
         <h2>TeachMe - Tech:</h2>
     </header>
     <div class="innerWrapper">
-
         <div class="filterWrapper">
             <h3>Select all that apply:</h3>
-          
+
             <p>Format:</p>
             <div class="wrapper" th:each="format : ${formats}">
                 <input type="checkbox" class="formatCheckbox" th:value="${format.name}"/>
@@ -30,9 +29,6 @@
                 <input type="checkbox" class="languageCheckbox" th:value="${language.name}"/>
                 <span class="checkBoxSpan" th:text="${language.name}"></span>
             </div>
-
-
-
         </div>
 
         <div class="filterResults">
@@ -41,7 +37,7 @@
         </div>
         <div class="topResults">
             <h3>Toplist</h3>
-            <ol >
+            <ol>
                 <li th:each="tutorial : ${topList}">
                     <p th:text="${tutorial.title}"></p>
                     <a th:text="${tutorial.url}" th:href="@{${tutorial.url}}" target="_blank"></a>

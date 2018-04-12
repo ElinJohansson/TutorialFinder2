@@ -1,64 +1,31 @@
 body {
     background-color: crimson;
     font-family: verdana;
-    width: 80%;
-    align: center;
-    top: 0;
-    margin-top: 0px;
-    margin: auto;
 }
 
 /* Textutseende */
 .outerWrapper{
-    background: #c0c0c0;
-    padding: 10px;
+    background: #444445;
 }
 .header{
     background: #c0c0c0;
-    position: sticky;
-    /*padding: 10px;*/
-    top: 0;
-            /*align-items: center;*/
-            /*left: 0;*/
-            /*right: 0;*/
-            /*height: 100px;*/
-            /*margin: 0 auto;*/
-            /*text-align: right;*/
-            /*z-index: 1;*/
 }
-
 .filterWrapper{
     background: #ffffff;
     display: inline-block;
     min-width: 200px;
     max-width: 200px;
-
-
-            /*flex-direction: column;*/
-            /*height: 100%;*/
-            /*overflow: auto;*/
-            /*position: fixed;*/
-            /*top: 0;*/
-            /*transition: left;*/
-            /*padding: 10px;*/
-            /*z-index: 1;*/
-
 }
 .filterResults{
     background: #f0f0f0;
     display: inline-block;
     flex-grow: 3;
-                /*padding: 10px;*/
-                /*z-index: 1;*/
+
 }
 .innerWrapper{
-    background: #ffffff;
+    background: #61482E;
     display: flex;
     justify-content: space-between;
-            /*padding: 10px;*/
-            height: 100%;
-            /*width: 95%;*/
-            z-index: 1;
 }
 
 li {
@@ -70,12 +37,6 @@ h4{
     font-size: 1.0em;
     font-weight: bold;
     font-family: Verdana;
-}
-h2{
-    text-align: right;
-    alignment: right;
-    font-family: Verdana;
-    color: #000;
 }
 span{
     font-size: 1.0em;
@@ -108,11 +69,11 @@ a:link {
 }
 
 /*a:hoover {*/
-    /*font-family: Verdana;*/
-    /*font-size: 1.1em;,,*/
+/*font-family: Verdana;*/
+/*font-size: 1.1em;,,*/
 /*font-style: normal;*/
-    /*color: #CC9861;*/
-    /*text-decoration: none;*/
+/*color: #CC9861;*/
+/*text-decoration: none;*/
 /*}*/
 
 a:visited {

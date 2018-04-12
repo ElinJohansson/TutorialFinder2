@@ -21,22 +21,26 @@
             <h3>Select all that apply:</h3>
 
             <p>Language:</p>
-            <div class="wrapper" th:each="language : ${languages}">
+            <label class="wrapper" th:each="language : ${languages}">
                 <input type="checkbox" class="languageCheckbox" th:value="${language.name}"/>
                 <span class="checkBoxSpan" th:text="${language.name}"></span>
-            </div>
+                <span class="checkmark"></span>
+            </label>
+
 
             <p>Format:</p>
-            <div class="wrapper" th:each="format : ${formats}">
+            <label class="wrapper" th:each="format : ${formats}">
                 <input type="checkbox" class="formatCheckbox" th:value="${format.name}"/>
                 <span class="checkBoxSpan" th:text="${format.name}"></span>
-            </div>
+                <span class="checkmark"></span>
+            </label>
 
             <p>Tags:</p>
-            <div class="wrapper" th:each="tag : ${tags}">
+            <label class="wrapper" th:each="tag : ${tags}">
                 <input type="checkbox" class="tagCheckbox" th:value="${tag}"/>
                 <span class="checkBoxSpan" th:text="${tag}"></span>
-            </div>
+                <span class="checkmark"></span>
+            </label>
 
 
         </div>

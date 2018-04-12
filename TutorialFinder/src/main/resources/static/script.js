@@ -63,7 +63,7 @@ function render(tutorialList) {
 
         console.log("rating " + rating);
         console.log("title " + tutorialTitle);
-        
+
         //ajaxanrop till controllern
         $.ajax({
             type: "POST",

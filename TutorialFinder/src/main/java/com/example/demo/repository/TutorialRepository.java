@@ -377,7 +377,7 @@ public class TutorialRepository implements Repository {
             int startF = startI;
             if (formats != null) {
                 startF+=formats.size();
-                for (int i = startF; i < formats.size(); i++) {
+                for (int i = 0; i < formats.size(); i++) {
                     ps.setString(i + startI + 1, formats.get(i));
                 }
             }

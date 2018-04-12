@@ -6,7 +6,7 @@ function render(tutorialList) {
     $(".instructions").remove();
     $("#returnedLanguages").html("");
     for (var i = 0; i < tutorialList.length; i++) {
-        $("#returnedLanguages").append("<li>" +
+        $("#returnedLanguages").append("<li class=\"listcolor" + i%2 + "\">" +
 
 
             "<h4 >Title: <span class=\"title\">" + tutorialList[i].title + "</span></h4>" +

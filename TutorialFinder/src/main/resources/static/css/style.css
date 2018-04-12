@@ -263,3 +263,11 @@ button {
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+.listcolor0 {
+    background-color: rgb(240, 240, 240);
+}
+
+.listcolor1 {
+    background-color: rgb(180, 180, 180);
+}

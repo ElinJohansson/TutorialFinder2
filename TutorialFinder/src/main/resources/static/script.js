@@ -1,16 +1,16 @@
 $("input[type=\"checkbox\"]").on("click", function (e) {
     //get all boxes that are checked
-   var checkedBoxes = $("input[type=\"checkbox\"]:checked");
-   var language = "";
-   var format = "";
-   for(var i = 0; i < checkedBoxes.length; i++){
-        if($(checkedBoxes[i]).hasClass("languageCheckbox")){
-            language+=$(checkedBoxes[i]).val()+",";
+    var checkedBoxes = $("input[type=\"checkbox\"]:checked");
+    var language = "";
+    var format = "";
+    for (var i = 0; i < checkedBoxes.length; i++) {
+        if ($(checkedBoxes[i]).hasClass("languageCheckbox")) {
+            language += $(checkedBoxes[i]).val() + ",";
         }
-        if($(checkedBoxes[i]).hasClass("formatCheckbox")){
-            format+=$(checkedBoxes[i]).val()+",";
+        if ($(checkedBoxes[i]).hasClass("formatCheckbox")) {
+            format += $(checkedBoxes[i]).val() + ",";
         }
-   }
+    }
 
     //ajaxanrop till controllern
     console.log("value: " + language);
@@ -35,34 +35,25 @@ $("input[type=\"checkbox\"]").on("click", function (e) {
 });
 
 
-
 //Renders the tutorialList which is retrieved using the ajax request, the returned list is actually
 //an array which is why we're using a regular for loop
 function render(tutorialList) {
     $("#returnedLanguages").html("");
     for (var i = 0; i < tutorialList.length; i++) {
         $("#returnedLanguages").append("<li>" +
-            "<p>Title:</p>" + tutorialList[i].title +
-            "<p>Average Rating:</p>\n" + tutorialList[i].avgRating +
-            "<p>URL:</p>\n" + tutorialList[i].url +
-            "<p>Year added:</p>\n" + tutorialList[i].creationDate.year +
-            "<p>Description:</p>\n" + tutorialList[i].descr +
-            "<p>Format:</p>\n" + tutorialList[i].format +
-            "<p>Language:</p>" + tutorialList[i].language +
-            "<form method=\"post\" action=\"addRating\">\n" +
-            "    <select name=\"rating\">\n" +
-            "    <option value=\"1\">1</option>\n" +
-            "    <option value=\"2\">2</option>\n" +
-            "    <option value=\"3\">3</option>\n" +
-            "    <option value=\"4\">4</option>\n" +
-            "    <option value=\"5\">5</option>\n" +
-            "    </select>\n" +
-            "    <input type=\"submit\" id=\"addRating\" value=\"Rate Tutorial\"/>\n" +
-            "    </form></li>");
+            "<h4>Title:</h4>" + tutorialList[i].title +
+            "<h4>Average Rating:</h4>\n" + tutorialList[i].avgRating +
+            "<h4>URL:</h4>\n" + "<a href=\"http://" + tutorialList[i].url + "\" target=\"_blank\">" + tutorialList[i].url + "</a>" +
+            "<h4>Year added:</h4>\n" + tutorialList[i].creationDate.year +
+            "<h4>Description:</h4>\n" + tutorialList[i].descr +
+            "<h4>Format:</h4>\n" + tutorialList[i].format +
+            "<h4>Language:</h4>" + tutorialList[i].language +
+            "</li>");
+
     }
 }
 
-
+// <a href="http://www.google.se" target="_blank"> klicka här </a>
 
 
 

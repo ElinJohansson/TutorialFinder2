@@ -47,9 +47,11 @@ function render(tutorialList) {
             url: "/addRating", //which is mapped to its partner function on our controller class
             success: function (result) {
                 console.log("successfully inserted ", result)
+
                 // render(result); //to update the result on the web page
             }
         });
+
         window.setTimeout(renderTutorials,100);
     });
 

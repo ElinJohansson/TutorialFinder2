@@ -39,6 +39,7 @@ function render(tutorialList) {
     for (var i = 0; i < tutorialList.length; i++) {
         $("#returnedLanguages").append("<li>" +
 
+
             "<h4 >Title: <span class=\"title\">" + tutorialList[i].title + "</span></h4>" +
             "<h4>Average Rating: <span>" + tutorialList[i].avgRating + "</span></h4>\n" +
             "<h4>URL: <span>" + tutorialList[i].url + "</span></h4>\n" +

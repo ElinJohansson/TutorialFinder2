@@ -57,7 +57,6 @@ public class TutorialController {
 
     @PostMapping("/addTags")
     public String getInfoFromAddTutorialForm(@RequestParam String title, @RequestParam String tag) {
-        //To get multiple tags from tag-string
         List<String> tags = Arrays.asList(tag.trim().split(" +"));
         repository.addTagsToTutorial(tags, title);
         return "redirect:/admin";
@@ -93,16 +92,15 @@ public class TutorialController {
         return tutorials;
     }
 
+    //Postmapping för ajax-anrop
     @PostMapping("/addRating")
     public @ResponseBody
     String postRating(@RequestParam String rating, @RequestParam String title, HttpSession session) {
         String votedTitles = (String) session.getAttribute("votedTitles");
-
         if (votedTitles.indexOf(title) < 0) {
             session.setAttribute("votedTitles", session.getAttribute("votedTitles") + "~" + title);
             int rate = Integer.parseInt(rating);
         }
         return title;
     }
-
 }

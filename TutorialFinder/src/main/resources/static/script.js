@@ -31,7 +31,7 @@ function render(tutorialList) {
             allStars += stars[l];
         }
 
-        console.log("tutorial title "+tutorialList[i].title);
+
         var isDisabled = listOfVotedTitles.indexOf(tutorialList[i].title) > -1 ? "disabled" : "";
         $("#returnedLanguages").append("<li class=\"listcolor" + i % 2 + "\">" +
             "<h4 >Title: <span class=\"title\">" + tutorialList[i].title + "</span></h4>" +

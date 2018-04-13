@@ -1,5 +1,5 @@
 body {
-    background-color: crimson;
+    background-color: #427F7C;
     font-family: verdana;
     width: 80%;
     height: 100%;
@@ -9,71 +9,55 @@ body {
     margin: auto;
 }
 
-html{
+html {
     height: 100%;
 }
 
 /* Textutseende */
-.outerWrapper{
-    /*background: #c0c0c0;*/
+.outerWrapper {
     height: auto;
     border: 1px;
     border-color: black;
 }
-.header{
+
+.header {
     background: #ffffff;
     position: sticky;
-    /*padding: 10px;*/
     top: 0;
     height: 100px;
     z-index: 5;
-
 }
 
-.filterWrapper{
-    background: #949494;
+.filterWrapper {
+    background: #B5B5B5;
     display: inline-block;
     min-width: 200px;
     max-width: 200px;
     height: auto;
     padding: 5px;
     z-index: 3;
-
-
-            /*flex-direction: column;*/
-            /*height: 100%;*/
-            /*overflow: auto;*/
-            /*position: fixed;*/
-            /*top: 0;*/
-            /*transition: left;*/
-            /*padding: 10px;*/
-            /*z-index: 1;*/
-
 }
-.filterResults{
+
+.filterResults {
     background: #f0f0f0;
     display: inline-block;
     flex-grow: 3;
-    min-height:1000px;
+    min-height: 1000px;
     height: auto;
     padding: 5px;
-                /*padding: 10px;*/
-                /*z-index: 1;*/
 }
-.innerWrapper{
+
+.innerWrapper {
     background: #ffffff;
     display: flex;
     height: auto;
-    min-height:1000px;
+    min-height: 1000px;
     justify-content: space-between;
-            /*padding: 10px;*/
-            /*height: 100%;*/
-            /*width: 95%;*/
-            z-index: 1;
+    z-index: 1;
 }
 
-.topResults{
-    background: #949494;
+.topResults {
+    background: #B5B5B5;
     display: inline-block;
     min-width: 300px;
     max-width: 300px;
@@ -92,24 +76,24 @@ ul {
     padding: 0;
 }
 
-h4{
+h4 {
     font-size: 1.0em;
     font-weight: bold;
     font-family: Verdana;
 }
-h2{
+
+h2 {
     text-align: right;
     alignment: right;
     font-family: Verdana;
-    color: #000;
 }
-span{
+
+span {
     font-size: 1.0em;
     font-weight: normal;
     font-family: Verdana;
     vertical-align: center;
 }
-
 
 .fontstyle {
     font-family: verdana;
@@ -120,7 +104,7 @@ span{
 }
 
 .fontspacing {
-    font-size:   10pt;
+    font-size: 10pt;
     line-height: 10pt;
 }
 
@@ -129,23 +113,23 @@ a:link {
     font-family: verdana;
     font-size: 1.1em;
     font-style: normal;
-    color: #61482E;
+    color: #4A4A4A;
     text-decoration: none;
 }
 
-/*a:hoover {*/
-    /*font-family: Verdana;*/
-    /*font-size: 1.1em;,,*/
-/*font-style: normal;*/
-    /*color: #CC9861;*/
-    /*text-decoration: none;*/
-/*}*/
+a:hover {
+font-family: Verdana;
+font-size: 1.1em;,,
+font-style: normal;
+color: #427F7C;
+text-decoration: none;
+}
 
 a:visited {
     font-family: Verdana;
     font-size: 1.1em;
     font-style: normal;
-    color: #4C3924;
+    color: #4A4A4A;
     text-decoration: none;
 }
 
@@ -153,20 +137,21 @@ a:active {
     font-family: Verdana;
     font-size: 1.1em;
     font-style: normal;
-    color: #AC7831;
+    color: #427F7C;
     text-decoration: none;
 }
-
 
 /* tabeller */
 .rubrik {
     background-color: #3FB5AA;
     color: black;
 }
+
 .dark {
     background-color: #949494;
     color: black;
 }
+
 .light {
     background-color: #CFCFCF;
     color: black;
@@ -210,7 +195,7 @@ a:active {
 
 /* When the checkbox is checked, add a blue background */
 .wrapper input:checked ~ .checkmark {
-    background-color: indianred;
+    background-color: #427F7C;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -237,23 +222,21 @@ a:active {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
 /*Style the select drop down menu */
 select {
-
     padding: 8px 12px;
     border: none;
-    background-color: #949494;
+    background-color: #787878;
     cursor: pointer;
 }
 
-
 select option:hover {
-    box-shadow: 0 0 10px 100px indianred inset;
+    box-shadow: 0 0 10px 100px #427F7C inset;
 }
 
-
 button {
-    background-color: #949494;
+    background-color: #787878;
     border: none;
     color: white;
     padding: 8px 20px;
@@ -263,7 +246,7 @@ button {
 }
 
 .button:hover {
-    background-color: indianred; /* Green */
+    background-color: #427F7C; /* Green */
     color: white;
 }
 
@@ -282,5 +265,5 @@ button {
 
 /*filled star color*/
 .checked {
-    color: crimson;
+    color: #5FB8B3;
 }

@@ -153,7 +153,7 @@ a:link {
     font-style: normal;
     color: #4A4A4A;
     text-decoration: none;
-    word-break: break-all;
+    /*word-break: break-all;*/
 }
 
 a:hover {
@@ -318,4 +318,8 @@ button {
 /*filled star color*/
 .checked {
     color: #427F7C;
+}
+
+.topListLinks {
+    white-space: normal;
 }

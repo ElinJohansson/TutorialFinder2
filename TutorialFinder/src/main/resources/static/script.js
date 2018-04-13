@@ -28,6 +28,7 @@ function render(tutorialList) {
 
 
     }
+    $(".disabled").text("Rated!");
 
 
     $(".button").on("click", function (e) {

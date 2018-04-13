@@ -143,8 +143,7 @@ span {
 }
 
 .fontspacing {
-    font-size: 10pt;
-    line-height: 10pt;
+    line-height: 20pt;
 }
 
 /* Länkar */

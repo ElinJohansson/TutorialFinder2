@@ -7,6 +7,7 @@ function render(tutorialList) {
     $(".instructions").remove();
     $("#returnedLanguages").html("");
     for (var i = 0; i < tutorialList.length; i++) {
+
         var isDisabled = listOfVotedTitles.indexOf(tutorialList[i].title) > -1 ? "disabled" : "";
         console.log("is button with title"+tutorialList[i].title+" disabled :"+isDisabled);
         $("#returnedLanguages").append("<li class=\"listcolor" + i%2 + "\">" +

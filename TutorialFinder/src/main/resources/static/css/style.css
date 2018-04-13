@@ -279,3 +279,8 @@ button {
 .listcolor1 {
     background-color: rgb(180, 180, 180);
 }
+
+/*filled star color*/
+.checked {
+    color: crimson;
+}

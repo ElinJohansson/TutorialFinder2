@@ -1,17 +1,42 @@
 $("input[type=\"checkbox\"]").on("click", renderTutorials);
 
 var listOfVotedTitles = [];
+
 //Renders the tutorialList which is retrieved using the ajax request, the returned list is actually
 //an array which is why we're using a regular for loop
 function render(tutorialList) {
     $(".instructions").remove();
     $("#returnedLanguages").html("");
+
+
     for (var i = 0; i < tutorialList.length; i++) {
+
+        //to the nearest integer
+        var rating = Math.round(tutorialList[i].avgRating);
+
+        //array of strings
+        var stars = [];
+        //loop over all the stars and push checked stars
+        for (var j = 0; j < rating; j++) {
+            stars.push("<span class=\"fa fa-star checked\"></span>");
+
+        }
+        //loop over until 5 stars are in the stars array
+        for (var k = rating ; k < 5; k++) {
+            stars.push("<span class=\"fa fa-star\"></span>");
+        }
+        //create a whole string of all the stars in the array
+        var allStars = "";
+        for (var l = 0; l < stars.length; l++) {
+            allStars += stars[l];
+        }
+
+        console.log("tutorial title "+tutorialList[i].title);
         var isDisabled = listOfVotedTitles.indexOf(tutorialList[i].title) > -1 ? "disabled" : "";
-        $("#returnedLanguages").append("<li class=\"listcolor" + i%2 + "\">" +
+        $("#returnedLanguages").append("<li class=\"listcolor" + i % 2 + "\">" +
             "<h4 >Title: <span class=\"title\">" + tutorialList[i].title + "</span></h4>" +
-            "<h4>Average Rating: <span>" + tutorialList[i].avgRating + "</span></h4>\n" +
-            "<h4>URL: <span> " + "<a href=\""+ tutorialList[i].url + "\" target=\"_blank\">" + tutorialList[i].url + "</a>" +"</span></h4>\n"  +
+            "" + allStars +
+            "<h4>URL: <span> " + "<a href=\"" + tutorialList[i].url + "\" target=\"_blank\">" + tutorialList[i].url + "</a>" + "</span></h4>\n" +
             "<h4>Year added: <span>" + tutorialList[i].creationDate.year + "</span></h4>\n" +
             "<h4>Description: <span>" + tutorialList[i].descr + "</span></h4>\n" +
 
@@ -22,8 +47,10 @@ function render(tutorialList) {
             "    <option value=\"4\">4</option>\n" +
             "    <option value=\"5\">5</option>\n" +
             "    </select>\n" +
-            "    <button class=\"button\ "+isDisabled+"\" >Rate me</button>\n" + "</li>"
+            "    <button class=\"button\ " + isDisabled + "\" >Rate me</button>\n" + "</li>"
         );
+
+
     }
     $(".disabled").text("Rated!");
 
@@ -54,7 +81,7 @@ function render(tutorialList) {
             }
         });
 
-        window.setTimeout(renderTutorials,100);
+        window.setTimeout(renderTutorials, 100);
     });
 
 }

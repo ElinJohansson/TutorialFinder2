@@ -97,13 +97,14 @@ public class TutorialController {
 
     @PostMapping("/addRating")
     public @ResponseBody
-    void postRating(@RequestParam String rating, @RequestParam String title, HttpSession session) {
+    String postRating(@RequestParam String rating, @RequestParam String title, HttpSession session) {
         String votedTitles = (String) session.getAttribute("votedTitles");
 
         if (votedTitles.indexOf(title) < 0) {
             session.setAttribute("votedTitles", session.getAttribute("votedTitles") + "~" + title);
             int rate = Integer.parseInt(rating);
         }
+        return title;
     }
 
 }

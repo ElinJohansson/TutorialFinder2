@@ -32,14 +32,12 @@ public class TutorialController {
     @GetMapping("/index")
     public ModelAndView getTutorialsByFilter(HttpSession session) {
         session.setAttribute("votedTitles", "");
-        List<Tutorial> tutorials = repository.getTutorials();
         List<Language> languages = repository.getLanguages();
         List<Tutorial> topList = repository.getToplist();
         List<Format> formats = repository.getFormats();
         List<String> tags = repository.getTags();
 
         return new ModelAndView("index")
-                .addObject("tutorials", tutorials)
                 .addObject("languages", languages)
                 .addObject("formats", formats)
                 .addObject("topList", topList)
@@ -59,7 +57,6 @@ public class TutorialController {
 
     @PostMapping("/addTags")
     public String getInfoFromAddTutorialForm(@RequestParam String title, @RequestParam String tag) {
-        //To get multiple tags from tag-string
         List<String> tags = Arrays.asList(tag.trim().split(" +"));
         repository.addTagsToTutorial(tags, title);
         return "redirect:/admin";
@@ -76,7 +73,6 @@ public class TutorialController {
     @GetMapping("/filterOnLanguage")
     public @ResponseBody
     List<Tutorial> getFilterOnLanguage(@RequestParam String language, @RequestParam String format, @RequestParam String tag) {
-        System.out.println("ajax request successful");
         if (language == null) {
             throw new TutorialRepositoryException("No language was checked");
         }
@@ -95,16 +91,15 @@ public class TutorialController {
         return tutorials;
     }
 
+    //Postmapping för ajax-anrop
     @PostMapping("/addRating")
     public @ResponseBody
     String postRating(@RequestParam String rating, @RequestParam String title, HttpSession session) {
         String votedTitles = (String) session.getAttribute("votedTitles");
-
         if (votedTitles.indexOf(title) < 0) {
             session.setAttribute("votedTitles", session.getAttribute("votedTitles") + "~" + title);
             int rate = Integer.parseInt(rating);
         }
         return title;
     }
-
 }

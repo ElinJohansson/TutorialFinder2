@@ -230,54 +230,6 @@ public class TutorialRepository implements Repository {
         }
     }
 
-
-    @Override
-    public List<Tutorial> getTutorials() {
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("select\n" +
-                     "    t.id\n" +
-                     "    ,t.title\n" +
-                     "    ,descr = cast(t.descr as varchar(max))\n" +
-                     "    ,t.format_id\n" +
-                     "    ,t.language_id\n" +
-                     "    ,t.url\n" +
-                     "    ,f.name as format\n" +
-                     "    ,l.name as language\n" +
-                     "    ,t.creationDate" +
-                     "    ,round(avg(cast(tr.rating as float)), 1)  as avgRating\n" +
-                     "from Tutorial as t\n" +
-                     "    join Format as f\n" +
-                     "        on t.format_id = f.id  \n" +
-                     "    join Language as l\n" +
-                     "        on t.language_id = l.id\n" +
-                     "    left join Rating as tr\n" +
-                     "        on t.id = tr.tutorial_id\n" +
-                     "group by t.id ,t.title, t.format_id, t.language_id, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) " +
-                     "order by avgRating DESC")) {
-            ResultSet results = ps.executeQuery();
-
-            List<Tutorial> tutorials = new ArrayList<>();
-            System.out.println("hej");
-            while (results.next()) {
-                tutorials.add(new Tutorial(
-                        results.getLong("id"),
-                        results.getString("title"),
-                        results.getString("language"),
-                        results.getString("format"),
-                        results.getDouble("avgRating"),
-                        results.getTimestamp("creationDate").toLocalDateTime(),
-                        results.getString("descr"),
-                        results.getString("url")));
-            }
-            return tutorials;
-
-        } catch (SQLException e)
-
-        {
-            throw new TutorialRepositoryException("Unable to fetch tutorial from database", e);
-        }
-    }
-
     @Override
     public List<Tutorial> getTutorialsByLanguage(List<String> languages, List<String> formats, List<String> tags) {
         StringBuilder sb = new StringBuilder();

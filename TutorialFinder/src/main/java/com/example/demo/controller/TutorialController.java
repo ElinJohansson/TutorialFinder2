@@ -32,14 +32,12 @@ public class TutorialController {
     @GetMapping("/index")
     public ModelAndView getTutorialsByFilter(HttpSession session) {
         session.setAttribute("votedTitles", "");
-        List<Tutorial> tutorials = repository.getTutorials();
         List<Language> languages = repository.getLanguages();
         List<Tutorial> topList = repository.getToplist();
         List<Format> formats = repository.getFormats();
         List<String> tags = repository.getTags();
 
         return new ModelAndView("index")
-                .addObject("tutorials", tutorials)
                 .addObject("languages", languages)
                 .addObject("formats", formats)
                 .addObject("topList", topList)

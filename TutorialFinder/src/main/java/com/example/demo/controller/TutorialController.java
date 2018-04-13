@@ -99,6 +99,7 @@ public class TutorialController {
         if (votedTitles.indexOf(title) < 0) {
             session.setAttribute("votedTitles", session.getAttribute("votedTitles") + "~" + title);
             int rate = Integer.parseInt(rating);
+            repository.addRatingToTutorial(title,rate);
         }
         return title;
     }

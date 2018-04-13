@@ -45,7 +45,7 @@ public class DemoApplication implements CommandLineRunner {
 //                "\tname nvarchar(100) NOT NULL UNIQUE,\n" +
 //                "\tPRIMARY KEY (id)\n" +
 //                "\t)");
-
+//
 //        jdbcTemplate.execute("CREATE TABLE Tags (\n" +
 //                "id int IDENTITY(1,1) NOT NULL,\n" +
 //                "name nvarchar(100) NOT NULL UNIQUE,\n" +
@@ -58,10 +58,10 @@ public class DemoApplication implements CommandLineRunner {
 //                "PRIMARY KEY (id)\n" +
 //                ")");
 //        jdbcTemplate.execute("CREATE TABLE Rating (\n" +
-//                "id int IDENTITY(1,1) NOT NULL,\n" +
-//                "tutorial_id int NOT NULL,\n" +
-//                "rating int NOT NULL CHECK (value >= 1 AND value <= 5),\n" +
-//                "PRIMARY KEY (id)\n" +
+//                "\t id int IDENTITY(1,1) NOT NULL, \n" +
+//                "                tutorial_id int NOT NULL,\n" +
+//                "                rating int NOT NULL CHECK (rating >= 1 AND rating <= 5), \n" +
+//                "                PRIMARY KEY (id)\n" +
 //                ")");
 //        jdbcTemplate.execute("ALTER TABLE Tutorial\n" +
 //                "ADD FOREIGN KEY (language_id) REFERENCES Language(id) ON DELETE CASCADE ON UPDATE CASCADE");

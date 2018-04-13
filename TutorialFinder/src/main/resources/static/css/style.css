@@ -133,6 +133,14 @@ a:visited {
     text-decoration: none;
 }
 
+a:visited:hover {
+    font-family: Verdana;
+    font-size: 1.1em;,,
+    font-style: normal;
+    color: #427F7C;
+    text-decoration: none;
+}
+
 a:active {
     font-family: Verdana;
     font-size: 1.1em;

@@ -4,34 +4,50 @@
     <meta charset="UTF-8"/>
     <link href="css/style.css" type="text/css" rel="stylesheet"/>
     <title>Admin</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 
-<h2>Add tutorial:</h2>
+<div class="outerWrapper">
 
-<form method="post" action="/addTutorial">
-    <p>Title: </p><input type="text" name="title"/>
-    <p>URL: </p><input type="text" name="url"/>
-    <p>Language: </p><input type="text" name="language"/>
-    <p>Format: </p><input type="text" name="format"/>
-    <p>Description: </p><textarea name="descr"></textarea>
-    <p>Tags, separated by space: </p><input type="text" name="tag"/>
-    <input type="submit" value="Submit tutorial"/>
-</form>
 
-<h2>Add tag to tutorial:</h2>
-<form method="post" action="/addTags">
-    <p>Tutorial title on which to add tag:</p><input type="text" name="title"/>
-    <p>Tag(s) name, separated by space:</p><input type="text" name="tag"/>
-    <input type="submit" value="Add tag"/>
-</form>
+    <header class="header">
+        <h1><img src="logotype_admin.png" height="100" align="top"/></h1>
+    </header>
+    <div class="innerWrapper">
 
-<h2>Add rating to tutorial:</h2>
-<form method="post" action="/adminRating">
-    <p>Tutorial title on which to add rating:</p><input type="text" name="title"/>
-    <p>Rating, integer 1-5</p><input type="text" name="rating"/>
-    <input type="submit" value="Add rating"/>
-</form>
+        <div id="admin-container">
+            <div class="admin-item">
+                <h1>Add tutorial:</h1>
+                <form method="post" action="/addTutorial">
+                    <p>Title: </p><input type="text" name="title"/>
+                    <p>URL: </p><input type="text" name="url"/>
+                    <p>Language: </p><input type="text" name="language"/>
+                    <p>Format: </p><input type="text" name="format"/>
+                    <p>Description: </p><textarea name="descr"></textarea>
+                    <p>Tags, separated by space: </p><input type="text" name="tag"/>
+                    <input type="submit" value="Submit tutorial"/>
+                </form>
+            </div>
+            <div class="admin-item">
+                <h1>Add tag to tutorial:</h1>
+                <form method="post" action="/addTags">
+                    <p>Tutorial title on which to add tag:</p><input type="text" name="title"/>
+                    <p>Tag(s) name, separated by space:</p><input type="text" name="tag"/>
+                    <input type="submit" value="Add tag"/>
+                </form>
+            </div>
+            <div class="admin-item">
+                <h1>Add rating to tutorial:</h1>
+                <form method="post" action="/adminRating">
+                    <p>Tutorial title on which to add rating:</p><input type="text" name="title"/>
+                    <p>Rating, integer 1-5</p><input type="text" name="rating"/>
+                    <input type="submit" value="Add rating"/>
+                </form>
+            </div>
+        </div>
 
+    </div>
+</div>
 </body>
 </html>

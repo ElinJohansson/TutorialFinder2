@@ -22,7 +22,7 @@
         <div class="filterWrapper">
             <h3>Select all that apply:</h3>
 
-            <p class="title">Language:</p>
+            <p class="title">I want to learn:</p>
             <label class="wrapper" th:each="language : ${languages}">
                 <input type="checkbox" class="languageCheckbox" th:value="${language.name}"/>
                 <span class="checkBoxSpan" th:text="${language.name}"></span>

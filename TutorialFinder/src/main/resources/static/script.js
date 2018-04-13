@@ -32,10 +32,9 @@ function render(tutorialList) {
         var isDisabled = listOfVotedTitles.indexOf(tutorialList[i].title) > -1 ? "disabled" : "";
 
         $("#returnedLanguages").append("<li class=\"listcolor" + i % 2 + "\">" +
-            "<h4 ><span class=\"title\">" + tutorialList[i].title + "</span></h4>" +
+            "<h4><span> " + "<a class=\"title\" href=\"" + tutorialList[i].url + "\" target=\"_blank\">" + tutorialList[i].title + "</a>" + "</span></h4>\n" +
             "" + allStars +
             "<h4><span>" + tutorialList[i].descr + "</span></h4>\n" +
-            "<h4><span> " + "<a href=\"" + tutorialList[i].url + "\" target=\"_blank\">" + tutorialList[i].url + "</a>" + "</span></h4>\n" +
             "<h4>Year added: <span>" + tutorialList[i].creationDate.year + "</span></h4>\n" +
             "    <select name=\"rating\">\n" +
             "    <option value=\"1\">1</option>\n" +

@@ -12,6 +12,14 @@ body {
 html{
     height: 100%;
 }
+#logo {
+    height: auto;
+    width: 100%;
+    max-height: 100px;
+    max-width: 440px;
+    min-width: 353px;
+    min-height: 100px;
+}
 
 /* Textutseende */
 .outerWrapper{
@@ -33,7 +41,7 @@ html{
 .filterWrapper{
     background: #949494;
     display: inline-block;
-    min-width: 200px;
+    /*min-width: 200px;*/
     max-width: 200px;
     height: auto;
     padding: 5px;
@@ -57,6 +65,7 @@ html{
     min-height:1000px;
     height: auto;
     padding: 5px;
+    max-width: 700px;
                 /*padding: 10px;*/
                 /*z-index: 1;*/
 }
@@ -75,10 +84,11 @@ html{
 .topResults{
     background: #949494;
     display: inline-block;
-    min-width: 300px;
+    /*min-width: 300px;*/
     max-width: 300px;
     height: auto;
     padding: 5px;
+
 }
 
 li {
@@ -98,7 +108,7 @@ h4{
     font-family: Verdana;
 }
 h2{
-    text-align: right;
+    text-align: center;
     alignment: right;
     font-family: Verdana;
     color: #000;
@@ -131,6 +141,7 @@ a:link {
     font-style: normal;
     color: #61482E;
     text-decoration: none;
+    word-break: break-all;
 }
 
 /*a:hoover {*/

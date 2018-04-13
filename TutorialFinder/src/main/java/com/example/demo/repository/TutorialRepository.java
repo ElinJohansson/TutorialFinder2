@@ -410,7 +410,6 @@ public class TutorialRepository implements Repository {
             ResultSet results = ps.executeQuery();
 
             List<Tutorial> tutorials = new ArrayList<>();
-            System.out.println("hej");
             while (results.next()) {
                 tutorials.add(new Tutorial(
                         results.getLong("id"),

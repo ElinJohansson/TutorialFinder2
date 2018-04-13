@@ -73,7 +73,6 @@ public class TutorialController {
     @GetMapping("/filterOnLanguage")
     public @ResponseBody
     List<Tutorial> getFilterOnLanguage(@RequestParam String language, @RequestParam String format, @RequestParam String tag) {
-        System.out.println("ajax request successful");
         if (language == null) {
             throw new TutorialRepositoryException("No language was checked");
         }

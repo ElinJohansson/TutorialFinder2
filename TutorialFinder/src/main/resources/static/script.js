@@ -2,19 +2,16 @@ $("input[type=\"checkbox\"]").on("click", renderTutorials);
 
 var listOfVotedTitles = [];
 
-//Renders the tutorialList which is retrieved using the ajax request, the returned list is actually
-//an array which is why we're using a regular for loop
+//Renders the tutorialList which is retrieved using the ajax request, the returned list is an array
 function render(tutorialList) {
     $(".instructions").remove();
-    $("#returnedLanguages").html("");
+    $("#returnedLanguages").html(""); //clears the resultarea
 
-
+    //Loops through the respons from our ajax request
     for (var i = 0; i < tutorialList.length; i++) {
 
         //to the nearest integer
         var rating = Math.round(tutorialList[i].avgRating);
-
-        //array of strings
         var stars = [];
         //loop over all the stars and push checked stars
         for (var j = 0; j < rating; j++) {
@@ -31,15 +28,15 @@ function render(tutorialList) {
             allStars += stars[l];
         }
 
-
+        //checks what titles the user has already voted on in the current view
         var isDisabled = listOfVotedTitles.indexOf(tutorialList[i].title) > -1 ? "disabled" : "";
+
         $("#returnedLanguages").append("<li class=\"listcolor" + i % 2 + "\">" +
             "<h4 >Title: <span class=\"title\">" + tutorialList[i].title + "</span></h4>" +
             "" + allStars +
             "<h4>URL: <span> " + "<a href=\"" + tutorialList[i].url + "\" target=\"_blank\">" + tutorialList[i].url + "</a>" + "</span></h4>\n" +
             "<h4>Year added: <span>" + tutorialList[i].creationDate.year + "</span></h4>\n" +
             "<h4>Description: <span>" + tutorialList[i].descr + "</span></h4>\n" +
-
             "    <select name=\"rating\">\n" +
             "    <option value=\"1\">1</option>\n" +
             "    <option value=\"2\">2</option>\n" +
@@ -49,24 +46,17 @@ function render(tutorialList) {
             "    </select>\n" +
             "    <button class=\"button\ " + isDisabled + "\" >Rate me</button>\n" + "</li>"
         );
-
-
     }
     $(".disabled").text("Rated!");
-
 
     $(".button").on("click", function (e) {
         var rating = $(this).prev().val();
         var tutorialTitle = $(this).closest("li").children(":first").children(":first").html();
 
-        console.log("rating " + rating);
-        console.log("title " + tutorialTitle);
-
-        //ajaxanrop till controllern
         $.ajax({
             type: "POST",
             error: function () {
-                console.log("error sending the data");
+                //console.log("error sending the data");
                 render([]);
             },
             data: {
@@ -75,15 +65,13 @@ function render(tutorialList) {
             },
             url: "/addRating", //which is mapped to its partner function on our controller class
             success: function (result) {
-                console.log("successfully inserted ", result)
+                //console.log("successfully inserted ", result)
                 listOfVotedTitles.push(result);
                 // render(result); //to update the result on the web page
             }
         });
-
         window.setTimeout(renderTutorials, 100);
     });
-
 }
 
 function renderTutorials() {
@@ -104,12 +92,10 @@ function renderTutorials() {
         }
     }
 
-    //ajaxanrop till controllern
-    console.log("value: " + language);
     $.ajax({
         type: "GET",
         error: function () {
-            console.log("error retrieving the data");
+           // console.log("error retrieving the data");
             render([]);
         },
         data: {
@@ -119,7 +105,7 @@ function renderTutorials() {
         },
         url: "/filterOnLanguage", //which is mapped to its partner function on our controller class
         success: function (result) {
-            console.log("successfully fetched ", result)
+          //  console.log("successfully fetched ", result)
             render(result); //to update the result on the web page
         }
     });

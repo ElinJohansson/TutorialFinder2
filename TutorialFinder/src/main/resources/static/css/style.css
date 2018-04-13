@@ -69,6 +69,9 @@ li {
     font-size: 1.0em;
     font-family: Verdana;
 }
+.title {
+    font-weight: bold;
+}
 
 ul {
     list-style-type: none;
@@ -265,13 +268,18 @@ button {
 
 .listcolor0 {
     background-color: rgb(240, 240, 240);
+    padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 .listcolor1 {
     background-color: rgb(180, 180, 180);
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top:1px;
 }
 
 /*filled star color*/
 .checked {
-    color: #5FB8B3;
+    color: #427F7C;
 }

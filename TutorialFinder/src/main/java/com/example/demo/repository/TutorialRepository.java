@@ -301,23 +301,6 @@ public class TutorialRepository implements Repository {
 
         try (Connection conn = dataSource.getConnection();
 
-//             PreparedStatement ps = conn.prepareStatement("select t.id,Tags.name,t.title,descr = cast(t.descr as varchar(max)),t.format_id,t.language_id,t.url,f.name as format,l.name as language,\n" +
-//                     "\tt.creationDate,round(avg(cast(tr.rating as float)), 1) as avgRating\n" +
-//                     "from Tutorial as t\n" +
-//                     "join Format as f\n" +
-//                     "on t.format_id = f.id\n" +
-//                     "join Language as l\n" +
-//                     "on t.language_id = l.id\n" +
-//                     "left join Rating as tr\n" +
-//                     "on t.id = tr.tutorial_id\n" +
-//                     "inner join TutorialTags as tt\n" +
-//                     " on tt.tutorial_id = t.id\n" +
-//                     " inner join Tags \n" +
-//                     " on Tags.id = tt.tags_id\n" +
-//                     "  where " +questionMarks+format+tag+"\n" +
-//                     "group by t.id ,t.title, t.format_id, t.language_id, Tags.name, t.url, f.name, l.name, t.creationDate, cast(t.descr as varchar(max)) \n" +
-//                     "order by avgRating DESC")) {
-
             PreparedStatement ps = conn.prepareStatement("select *\n" +
                     "from (    \n" +
                     "    select t.id\n" +

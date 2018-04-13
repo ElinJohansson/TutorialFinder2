@@ -86,6 +86,12 @@ li {
     font-family: Verdana;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 h4{
     font-size: 1.0em;
     font-weight: bold;

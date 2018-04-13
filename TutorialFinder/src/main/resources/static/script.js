@@ -8,7 +8,6 @@ function render(tutorialList) {
     $("#returnedLanguages").html("");
     for (var i = 0; i < tutorialList.length; i++) {
         var isDisabled = listOfVotedTitles.indexOf(tutorialList[i].title) > -1 ? "disabled" : "";
-        console.log("is button with title"+tutorialList[i].title+" disabled :"+isDisabled);
         $("#returnedLanguages").append("<li class=\"listcolor" + i%2 + "\">" +
             "<h4 >Title: <span class=\"title\">" + tutorialList[i].title + "</span></h4>" +
             "<h4>Average Rating: <span>" + tutorialList[i].avgRating + "</span></h4>\n" +
@@ -25,8 +24,6 @@ function render(tutorialList) {
             "    </select>\n" +
             "    <button class=\"button\ "+isDisabled+"\" >Rate me</button>\n" + "</li>"
         );
-
-
     }
     $(".disabled").text("Rated!");
 

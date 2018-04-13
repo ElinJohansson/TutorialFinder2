@@ -1,14 +1,16 @@
 $("input[type=\"checkbox\"]").on("click", renderTutorials);
 
+var listOfVotedTitles = [];
 //Renders the tutorialList which is retrieved using the ajax request, the returned list is actually
 //an array which is why we're using a regular for loop
 function render(tutorialList) {
     $(".instructions").remove();
     $("#returnedLanguages").html("");
     for (var i = 0; i < tutorialList.length; i++) {
+
+        var isDisabled = listOfVotedTitles.indexOf(tutorialList[i].title) > -1 ? "disabled" : "";
+        console.log("is button with title"+tutorialList[i].title+" disabled :"+isDisabled);
         $("#returnedLanguages").append("<li class=\"listcolor" + i%2 + "\">" +
-
-
             "<h4 >Title: <span class=\"title\">" + tutorialList[i].title + "</span></h4>" +
             "<h4>Average Rating: <span>" + tutorialList[i].avgRating + "</span></h4>\n" +
             "<h4>URL: <span> " + "<a href=\""+ tutorialList[i].url + "\" target=\"_blank\">" + tutorialList[i].url + "</a>" +"</span></h4>\n"  +
@@ -22,8 +24,10 @@ function render(tutorialList) {
             "    <option value=\"4\">4</option>\n" +
             "    <option value=\"5\">5</option>\n" +
             "    </select>\n" +
-            "    <button class=\"button\">Rate me</button>\n" + "</li>"
+            "    <button class=\"button\ "+isDisabled+"\" >Rate me</button>\n" + "</li>"
         );
+
+
     }
 
 
@@ -48,7 +52,7 @@ function render(tutorialList) {
             url: "/addRating", //which is mapped to its partner function on our controller class
             success: function (result) {
                 console.log("successfully inserted ", result)
-
+                listOfVotedTitles.push(result);
                 // render(result); //to update the result on the web page
             }
         });
